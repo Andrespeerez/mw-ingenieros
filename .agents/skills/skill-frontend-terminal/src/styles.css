@@ -1,0 +1,18 @@
+.terminal-shell {
+  font-family: ui-monospace,SFMono-Regular,Monaco,Consolas,'Courier New',monospace;
+  background: #0b0b0b;
+  color: #00ff00;
+  min-height: 100vh;
+}
+.layout { display: flex; height: 100vh; }
+.sidebar { width: 260px; background: #111; padding: 16px; border-right: 1px solid #222; }
+.logo { font-weight: bold; margin-bottom: 16px; }
+.sidebar-item { padding: 8px 6px; cursor: pointer; border-radius: 4px; margin: 4px 0; }
+.content-panel { flex: 1; padding: 20px; }
+.content { padding: 20px; background: rgba(0,0,0,.2); border-radius: 6px; border:1px solid #1f1f1f; }
+.modal-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,.6); display:flex; align-items:center; justify-content:center; }
+.modal { background:#111; padding:20px; border-radius:8px; width: 320px; border:1px solid #333; }
+.btn { padding:8px 12px; margin:6px; background:#0a0; border:1px solid #0a0; color:#000; cursor:pointer; }
+.btn.secondary { background:#333; color:#fff; }
+.modal-actions { display:flex; justify-content:flex-end; }
+.hint { font-size:12px; color:#888; }

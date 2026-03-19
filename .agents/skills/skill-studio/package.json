@@ -1,0 +1,15 @@
+{
+  "name": "skill-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CLI para crear, validar, documentar y versionar skills atómicas",
+  "main": "src/cli/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node ./src/cli/index.js",
+    "plan": "echo 'Plan only'",
+    "test": "echo 'no tests yet'"
+  },
+  "author": "mw-ingenieros-2",
+  "license": "MIT"
+}

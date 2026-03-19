@@ -1,0 +1,14 @@
+{
+  "name": "skill-react-testing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Atomic skill for React testing patterns",
+  "main": "src/cli/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node ./src/cli/index.js",
+    "test": "echo 'no tests yet'"
+  },
+  "author": "mw-ingenieros-2",
+  "license": "MIT"
+}

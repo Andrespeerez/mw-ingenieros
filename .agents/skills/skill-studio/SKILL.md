@@ -1,0 +1,21 @@
+# Skill Studio
+
+- Descripción: CLI para crear, validar, documentar y versionar skills atómicas.
+- Versión: v0.1.0
+- Requisitos: Node.js >= 18
+- Estructura esperada: base under .agents/skills/skill-studio/ con src/, templates/, tests/ y docs/
+- Comandos disponibles:
+  - init: Inicializa la base de un proyecto Skill Studio local.
+  - new <skill-name>: Crea la estructura base de una skill atómica.
+  - scaffold <type>: Aplica una plantilla de scaffold dentro de una skill existente.
+  - list: Lista las skills disponibles en el entorno.
+  - validate <path>: Valida la estructura mínima de una skill.
+  - docs <path>: Genera/actualiza documentación base.
+  - test <path>: Ejecuta tests unitarios o de integración básicos.
+  - publish <path> --tag <version>: Prepara publicación de la skill.
+  - templates: Muestra plantillas disponibles.
+- Ejemplos de uso:
+  - skill-studio init
+  - skill-studio new skill-auth-context
+  - skill-studio validate .agents/skills/skill-auth-context
+- Cómo publicar: Este kata prepara artefactos y metadata; no realiza pushes por sí mismo.
