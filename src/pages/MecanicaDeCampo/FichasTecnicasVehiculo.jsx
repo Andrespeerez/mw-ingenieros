@@ -1,55 +1,52 @@
-import React from 'react'
-import Page from '../../components/Page'
+import React, { useState } from 'react';
+import Page from '../../components/Page';
+import VehicleCard from '../../components/VehicleCard';
+import VehicleModal from '../../components/VehicleModal';
+import { vehicles } from '../../data/vehicles';
 
 export default function FichasTecnicasVehiculo() {
+  const [activeTab, setActiveTab] = useState('terrestres');
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
+
+  const tabs = [
+    { id: 'terrestres', label: 'Terrestres' },
+    { id: 'naves', label: 'Naves' }
+  ];
+
   return (
     <Page title="FICHAS TECNICAS VEHICULO">
-      <div
-        style={{
-          padding: '20px',
-          background: '#0d0d0d',
-          border: '1px solid #1a1a1a',
-          marginBottom: '24px',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-          <span style={{ color: '#00ff00' }}>{'>'}</span>
-          <span style={{ color: '#ffcc00' }}>[INFO]</span>
-          <span style={{ color: '#00aa00' }}>PENDIENTE DE CARGAR</span>
+      <div className="p-5 bg-panel border border-border mb-6">
+        <div className="flex gap-2 mb-6">
+          {tabs.map(tab => (
+            <button
+              key={tab.id}
+              className={`px-4 py-2 border ${
+                activeTab === tab.id
+                  ? 'bg-green-500 text-black'
+                  : 'bg-panel text-green-500 border-border hover:border-green-500'
+              }`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        <p style={{ marginBottom: '16px', paddingLeft: '24px', color: '#00aa00' }}>
-          {'>'} Base de datos de fichas tecnicas para vehiculos de combate.
-        </p>
-
-        <div style={{ paddingLeft: '24px' }}>
-          <p style={{ color: '#00ff00', marginBottom: '12px' }}>
-            {'>'} Vehiculos en base de datos:
-          </p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, paddingLeft: '16px' }}>
-            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-              <span style={{ color: '#00ff00' }}>{'->'}</span>
-              <span style={{ color: '#00cc00' }}>TX-130 Campo de Batalla</span>
-            </li>
-            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-              <span style={{ color: '#00ff00' }}>{'->'}</span>
-              <span style={{ color: '#00cc00' }}>Hailfire Droid</span>
-            </li>
-            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-              <span style={{ color: '#00ff00' }}>{'->'}</span>
-              <span style={{ color: '#00cc00' }}>AT-TE Walker</span>
-            </li>
-            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-              <span style={{ color: '#00ff00' }}>{'->'}</span>
-              <span style={{ color: '#00cc00' }}>AT-RT</span>
-            </li>
-            <li style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-              <span style={{ color: '#00ff00' }}>{'->'}</span>
-              <span style={{ color: '#00cc00' }}>SPHA-T</span>
-            </li>
-          </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {vehicles[activeTab].map(vehicle => (
+            <VehicleCard
+              key={vehicle.id}
+              vehicle={vehicle}
+              onClick={setSelectedVehicle}
+            />
+          ))}
         </div>
       </div>
+
+      <VehicleModal
+        vehicle={selectedVehicle}
+        onClose={() => setSelectedVehicle(null)}
+      />
     </Page>
-  )
+  );
 }

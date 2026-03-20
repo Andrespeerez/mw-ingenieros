@@ -4,26 +4,6 @@
 
  Este proyecto es una web frontal en React + TailwindCSS que asemeja una terminal retro. La interfaz utiliza un menú izquierdo tipo panel para navegar entre elementos de contenido, que se cargan en el panel derecho. Las bases deben ser sólidas para permitir reutilizabilidad y expansión (modales u otros elementos UI). La web incluye un sistema de login simulado (contraseña republica) para dar la sensación de área VIP sin seguridad real. El objetivo es proporcionar una base modular y escalable para construir la UI de forma incremental.
 
- Estrategia principal:
- - Convertir AGENTS.md en un índice central de skills atómicas, enlazando a SKILL.md individuales para cada una.
- - Mantener el contexto mínimo y legible para facilitar el descubrimiento y la reutilización.
- - Mantener una estructura simple para facilitar la ampliación futura y el versionado.
-
- Estructura del Proyecto (mínima para contexto):
- - .agents/: contiene las skills atómicas y plantillas asociadas.
- - AGENTS.md: índice central de skills con rutas a SKILL.md.
- - Cada skill en .agents/skills/skill-<slug>/ con: SKILL.md, package.json, src/, tests/ (plantillas base).
-
-Estrategia principal:
-- Convertir AGENTS.md en un índice central de skills atómicas, enlazando a SKILL.md individuales para cada una.
-- Mantener el contexto mínimo y legible para facilitar el descubrimiento y la reutilización.
-- Mantener una estructura simple para facilitar la ampliación futura y el versionado.
-
-Estructura del Proyecto (mínima para contexto):
-- .agents/: contiene las skills atómicas y plantillas asociadas.
-- AGENTS.md: índice central de skills con rutas a SKILL.md.
-- Cada skill en .agents/skills/skill-<slug>/ con: SKILL.md, package.json, src/, tests/ (plantillas base).
-
 ## Skills Catalog
 
 | slug | name | short_description | category | commands | skill_path | version | status | owner |
@@ -37,3 +17,17 @@ Estructura del Proyecto (mínima para contexto):
 | skill-frontend-terminal | Frontend Terminal Web | Interfaz front-end estilo terminal en React + Tailwind | Aplicación frontal con menú izquierdo y panel derecho, estilo terminal retro | init, start, scaffold-page, load-content | .agents/skills/skill-frontend-terminal/SKILL.md | v0.1.0 | planned | frontend |
 
 Notas: Este índice enlaza a SKILL.md individuales para cada skill atómica. Para ampliar, añade nuevas filas siguiendo la misma convención.
+| skill-comms | Comms | Login y encriptación para comunicaciones | Communications / Security | init, setup-login, manage-keys, rotate-keys, docs, test, publish | .agents/skills/skill-comms/SKILL.md | v0.1.0 | planned | equipo-comms |
+
+## Sistema de Fichas Técnicas de Vehículos
+
+Para gestionar de forma modular las fichas técnicas de naves y vehículos terrestres:
+
+- **Data (`src/data/vehicles.js`):** Fuente única de verdad. Estructura de objetos categorizados.
+- **Componentes:**
+  - `VehicleCard.jsx`: Visualización preliminar (Grid).
+  - `VehicleModal.jsx`: Visualización detallada mediante modal.
+- **Página (`src/pages/Vehiculos/Vehiculos.jsx`):** Lógica de renderizado dinámico basado en las categorías de `vehicles.js`.
+
+Para añadir un vehículo, solo editar el objeto en `src/data/vehicles.js`.
+
