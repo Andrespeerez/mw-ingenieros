@@ -56,28 +56,28 @@ export default function TerminalLayout() {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-[#0a0a0a] font-mono overflow-hidden">
-      <header className="h-12 bg-[#111111] border-b-2 border-[#00ff00] flex items-center px-4 flex-shrink-0">
+    <div className="fixed inset-0 flex flex-col bg-black font-mono overflow-hidden">
+      <header className="h-12 bg-panel border-b-2 border-green-500 flex items-center px-4 flex-shrink-0">
         {/* Hamburger button - only visible on mobile */}
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="md:hidden mr-3 px-2 py-1 border border-[#00ff00] text-[#00ff00] bg-transparent cursor-pointer text-sm"
+          className="md:hidden mr-3 px-2 py-1 border border-green-500 text-green-500 bg-transparent cursor-pointer text-sm"
         >
           {sidebarOpen ? '[X]' : '[=]'}
         </button>
 
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-4">
-            <span className="text-[#00ff00] text-sm">{'>'} GRAN_EJERCITO_REPUBLICA</span>
+            <span className="text-green-500 text-sm">{'>'} GRAN_EJERCITO_REPUBLICA</span>
             {/* Separator and version only visible on desktop */}
-            <span className="hidden md:inline text-[#333333]">|</span>
-            <span className="hidden md:inline text-[#00aa00] text-xs">TERMINAL_INGENIEROS_v2.4.1</span>
+            <span className="hidden md:inline text-border">|</span>
+            <span className="hidden md:inline text-green-700 text-xs">TERMINAL_INGENIEROS_MW_V2.4</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-[#00aa00] text-xs">OPERADOR: CT-001</span>
+            <span className="text-green-700 text-xs">OPERADOR: CT-001</span>
             <button
               onClick={handleLogout}
-              className="px-4 py-1 text-xs text-[#00ff00] border border-[#00ff00] bg-transparent cursor-pointer"
+              className="px-4 py-1 text-xs text-green-500 border border-green-500 bg-transparent cursor-pointer"
             >
               [SALIR]
             </button>
@@ -103,7 +103,7 @@ export default function TerminalLayout() {
         {sidebarOpen && (
           <>
             <div className="md:hidden fixed inset-0 bg-black/70 z-40" onClick={() => setSidebarOpen(false)} />
-            <aside className="md:hidden fixed top-0 left-0 w-72 h-full bg-[#0a0a0a] z-50 p-4" style={{ width: 280 }}>
+            <aside className="md:hidden fixed top-0 left-0 w-72 h-full bg-panel z-50 p-4">
               <Sidebar
                 items={menuConfig}
                 currentIndex={selectedIndex}
@@ -117,12 +117,12 @@ export default function TerminalLayout() {
         )}
 
         {/* Main content area */}
-        <main className="flex-1 bg-[#050505] p-6 overflow-y-auto" style={{ minWidth: 0 }}>
+        <main className="flex-1 bg-black p-6 overflow-y-auto">
           <Outlet />
         </main>
       </div>
 
-      <footer className="h-8 bg-[#111111] border-t border-[#222222] flex items-center justify-between px-4 text-xs text-[#00aa00] flex-shrink-0">
+      <footer className="h-8 bg-panel border-t border-border flex items-center justify-between px-4 text-xs text-green-700 flex-shrink-0">
         <span>{'>'} ESTADO: OPERATIVO</span>
         <span>MEMORIA: 640K | SISTEMA: CLONE_OS_2.4</span>
         <span>SESION: ACTIVA</span>

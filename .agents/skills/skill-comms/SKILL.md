@@ -1,0 +1,40 @@
+# Skill Comms
+Login y encriptación para comunicaciones
+
+- Descripción: Este skill agrupa plantillas y guías para establecer un flujo de login seguro (simulado) y la gestión de cifrado/clave para comunicaciones entre componentes. Está orientado a seguridad y confiabilidad de la comunicación, no a hacking.
+- Objetivos:
+  - Proveer una base para login simulado en la UI
+  - Implementar cifrado de mensajes y manejo de claves
+- Cifrado (Asimétrico y Simétrico)
+- ==================================================
+- Descripción: Este subsección agrupa las prácticas y conceptos clave sobre cifrado en comunicaciones, cubriendo métodos simétricos y asimétricos, intercambios de claves y firmas digitales, con énfasis en seguridad y rendimiento.
+- Enfoque general
+- - Criptografía simétrica: AES en sus modos seguros (GCM/CTR) para cifrado de mensajes en tránsito y en reposo.
+- - Criptografía asimétrica: RSA, ECC (P-256, X25519) para intercambio de llaves, cifrado de llaves y firmas digitales.
+- - Intercambio de claves: Diffie-Hellman, ECDH/X25519 para establecer claves compartidas sin exponerlas.
+- - Firmas y autenticación: RSA-PSS, ECDSA, Ed25519 para garantizar integridad y autenticidad.
+- - Protocolos y capas: TLS 1.2/1.3, DTLS para proteger canales de comunicación.
+- - Gestión de llaves: rotación, almacenamiento seguro (KMS, Vault, HSM).
+- - Consideraciones prácticas: selección de algoritmos, longitudes de clave, rendimiento y coste computacional.
+- Comandos (para referencia rápida)
+- - init: crear plantilla base
+- - setup-login: configurar flujo de login simulado
+- - manage-keys: gestionar claves de cifrado
+- - rotate-keys: rotar claves
+- - docs: generar documentación
+- - test: pruebas unitarias básicas
+- - publish: empaquetar y listar en el catálogo
+- Versión: v0.1.0
+- Estado: planned
+- Propietario: equipo-comms
+- Comandos:
+  - init: crear plantilla base
+  - setup-login: configurar flujo de login simulado
+  - manage-keys: gestionar claves de cifrado
+  - rotate-keys: rotar claves
+  - docs: generar documentación
+  - test: pruebas unitarias básicas
+  - publish: empaquetar y listar en el catálogo
+- Versión: v0.1.0
+- Estado: planned
+- Propietario: equipo-comms

@@ -1,40 +1,55 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function Page({ title, children }) {
+  const [isLoading, setIsLoading] = useState(true)
+  const [displayText, setDisplayText] = useState('')
+  const loadingText = `> CONECTANDO CON EL SERVIDOR... [${title}]`
+
+  useEffect(() => {
+    let timer
+    let charIndex = 0
+
+    const typing = setInterval(() => {
+      setDisplayText(loadingText.substring(0, charIndex + 1))
+      charIndex++
+      if (charIndex >= loadingText.length) {
+        clearInterval(typing)
+        timer = setTimeout(() => setIsLoading(false), 400)
+      }
+    }, 25)
+
+    return () => {
+      clearInterval(typing)
+      clearTimeout(timer)
+    }
+  }, [title])
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-start justify-start h-full p-4">
+        <div className="text-green-500 font-mono text-lg animate-pulse">
+          {displayText}
+          <span className="animate-blink">_</span>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div style={{ maxWidth: '900px' }}>
-      <div
-        style={{
-          marginBottom: '32px',
-          paddingBottom: '16px',
-          borderBottom: '1px solid #1a1a1a',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-          <span style={{ color: '#00ff00', fontWeight: 'bold' }}>{'>'}</span>
-          <h1
-            style={{
-              color: '#00ff00',
-              fontSize: '18px',
-              fontWeight: 'bold',
-              letterSpacing: '1px',
-            }}
-          >
+    <div className="max-w-[900px]">
+      <div className="mb-8 pb-4 border-b border-border">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-green-500 font-bold">{'>'}</span>
+          <h1 className="text-green-500 text-lg font-bold tracking-widest">
             {title}
           </h1>
         </div>
-        <div style={{ paddingLeft: '24px', fontSize: '11px', color: '#006600' }}>
+        <div className="pl-6 text-[11px] text-green-700">
           {'//'} Modulo activo
         </div>
       </div>
 
-      <div
-        style={{
-          fontSize: '13px',
-          lineHeight: '1.7',
-          color: '#00cc00',
-        }}
-      >
+      <div className="text-[13px] leading-relaxed text-green-700">
         {children}
       </div>
     </div>

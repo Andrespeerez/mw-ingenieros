@@ -1,0 +1,24 @@
+/* Paleta centralizada de colores basada en variables CSS
+   Estas variables se consumen desde Tailwind mediante rgb(var(--color-...))
+*/
+:root {
+  /* Panel y textos base */
+  --color-panel: 28 28 30;
+  --color-text: 235 235 238;
+  --color-text-soft: 190 190 190;
+  --color-border: 70 70 80;
+
+  /* Paleta Mint */
+  --color-mint-50: 237 247 239;
+  --color-mint-100: 214 246 226;
+  --color-mint-200: 176 236 218;
+  --color-mint-300: 123 210 198;
+  --color-mint-400: 67 176 164;
+  --color-mint-500: 16 125 110;
+
+  /* Colores de acento */
+  --color-cyan-500: 0 168 170;
+  --color-magenta-500: 180 70 190;
+  --color-yellow-500: 235 190 60;
+  --color-green-500: 60 180 120;
+}

@@ -6,91 +6,36 @@ export default function Sidebar({ items, currentIndex, onNavigate }) {
   let flatIndex = 0
 
   return (
-    <aside
-      style={{
-        width: '280px',
-        height: '100%',
-        background: '#0d0d0d',
-        borderRight: '1px solid #1a1a1a',
-        display: 'flex',
-        flexDirection: 'column',
-        flexShrink: 0,
-        overflow: 'hidden',
-      }}
-    >
-      <div
-        style={{
-          padding: '16px',
-          borderBottom: '1px solid #1a1a1a',
-        }}
-      >
-        <span
-          style={{
-            color: '#00ff00',
-            fontSize: '12px',
-            letterSpacing: '2px',
-          }}
-        >
+    <aside className="w-72 h-full bg-panel border-r border-border flex flex-col flex-shrink-0 overflow-hidden">
+      <div className="p-4 border-b border-border">
+        <span className="text-green-500 text-xs tracking-widest">
           [ MENU PRINCIPAL ]
         </span>
       </div>
 
-      <nav
-        style={{
-          flex: 1,
-          overflow: 'auto',
-          padding: '12px 0',
-        }}
-      >
+      <nav className="flex-1 overflow-auto p-3">
         {items.map((section, sIdx) => (
-          <div key={sIdx} style={{ marginBottom: '16px' }}>
-            <div
-              style={{
-                padding: '8px 16px',
-                fontSize: '11px',
-                color: '#00aa00',
-                fontWeight: 'bold',
-                letterSpacing: '1px',
-              }}
-            >
+          <div key={sIdx} className="mb-4">
+            <div className="p-2 text-[11px] text-green-700 font-bold tracking-wider">
               {'[ '}{section.section.toUpperCase()}{' ]'}
             </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <ul className="list-none p-0 m-0">
               {section.items.map((it) => {
                 const index = flatIndex++
                 const isActive = location.pathname === it.path
                 const isSelected = currentIndex === index
 
                 return (
-                  <li key={it.path} style={{ padding: '0 8px' }}>
+                  <li key={it.path} className="px-2">
                     <Link
                       to={it.path}
                       onClick={() => onNavigate(index)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        padding: '10px 12px',
-                        fontSize: '13px',
-                        color: isActive ? '#000000' : isSelected ? '#ffffff' : '#00cc00',
-                        background: isActive ? '#00ff00' : isSelected ? '#1a2a1a' : 'transparent',
-                        textDecoration: 'none',
-                        borderRadius: '2px',
-                        marginBottom: '4px',
-                        transition: 'all 0.15s',
-                      }}
+                      className={`flex items-center p-2.5 text-[13px] rounded transition-all duration-150 mb-1 ${isActive ? 'bg-green-500 text-black' : isSelected ? 'bg-green-900 text-white' : 'text-green-700 bg-transparent'}`}
                     >
-                      <span
-                        style={{
-                          width: '16px',
-                          textAlign: 'center',
-                          color: isActive ? '#000000' : '#00ff00',
-                          fontWeight: 'bold',
-                          fontSize: '14px',
-                        }}
-                      >
+                      <span className={`w-4 text-center font-bold text-sm ${isActive ? 'text-black' : 'text-green-500'}`}>
                         {isActive ? '>' : isSelected ? '_' : ' '}
                       </span>
-                      <span style={{ marginLeft: '12px' }}>{it.label}</span>
+                      <span className="ml-3">{it.label}</span>
                     </Link>
                   </li>
                 )
@@ -100,16 +45,9 @@ export default function Sidebar({ items, currentIndex, onNavigate }) {
         ))}
       </nav>
 
-      <div
-        style={{
-          padding: '12px 16px',
-          fontSize: '11px',
-          color: '#006600',
-          borderTop: '1px solid #1a1a1a',
-        }}
-      >
-        <div style={{ marginBottom: '4px' }}>{'//'} Navegacion:</div>
-        <div style={{ display: 'flex', gap: '12px' }}>
+      <div className="p-3 text-[11px] text-green-700 border-t border-border">
+        <div className="mb-1">{'//'} Navegacion:</div>
+        <div className="flex gap-3">
           <span>[↑↓]</span>
           <span>[ENTER]</span>
         </div>
