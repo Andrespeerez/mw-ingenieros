@@ -124,7 +124,23 @@ export const vehicles = {
         { titulo: "Sistemas", content: ["Alerones-S"] },
       ],
       tripulacion: "1",
-      notas: 'Esta nave puede ser operada por 3 personas, pero las funciones del copiloto pueden ser suplidas por un astrodroide. El puesto de artillero es imprescindible ya que esta nave es poco maniobrable y suele verse sobrepasada por naves más rápidas y maniobrables.'
+      notas: 'Esta nave puede ser operada por 3 personas, pero las funciones del copiloto pueden ser suplidas por un astrodroide. El puesto de artillero es imprescindible ya que esta nave es poco maniobrable y suele verse sobrepasada por naves más rápidas y maniobrables.',
+      reparacion: [
+        {
+          titulo: "Mantenimiento de Motores Subluz",
+          piezasNecesarias: ["Motor Subluz"],
+          nivelDificultad: "Alto",
+          herramientas: ["Soldador", "Analizador"],
+          notas: "Precisión crítica en la alineación de inyectores."
+        },
+        {
+          titulo: "Desguace de Escudos",
+          piezasNecesarias: ["Generador de Escudos"],
+          nivelDificultad: "Medio",
+          herramientas: ["Destornillador sónico"],
+          notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
+        }
+      ]
     },
     {
       id: 'BTL-ALA-Y',
@@ -157,7 +173,23 @@ export const vehicles = {
         { titulo: "Sistemas", content: "Radar de corto alcance" }
       ],
       tripulacion: 2,
-      notas: 'Excelente para terrenos difíciles.'
+      notas: 'Excelente para terrenos difíciles.',
+      reparacion: [
+        {
+          titulo: "Mantenimiento de Motores Subluz",
+          piezasNecesarias: ["Motor Subluz"],
+          nivelDificultad: "Alto",
+          herramientas: ["Soldador", "Analizador"],
+          notas: "Precisión crítica en la alineación de inyectores."
+        },
+        {
+          titulo: "Desguace de Escudos",
+          piezasNecesarias: ["Generador de Escudos"],
+          nivelDificultad: "Medio",
+          herramientas: ["Destornillador sónico"],
+          notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
+        }
+      ]
     }
   ],
   navesCapitales: [
@@ -172,7 +204,23 @@ export const vehicles = {
         { titulo: "Sistemas", content: "Hangares masivos, Bombardeo orbital" }
       ],
       tripulacion: "7400",
-      notas: 'La columna vertebral de la Flota de la República.'
+      notas: 'La columna vertebral de la Flota de la República.',
+      reparacion: [
+        {
+          titulo: "Mantenimiento de Motores Subluz",
+          piezasNecesarias: ["Motor Subluz"],
+          nivelDificultad: "Alto",
+          herramientas: ["Soldador", "Analizador"],
+          notas: "Precisión crítica en la alineación de inyectores."
+        },
+        {
+          titulo: "Desguace de Escudos",
+          piezasNecesarias: ["Generador de Escudos"],
+          nivelDificultad: "Medio",
+          herramientas: ["Destornillador sónico"],
+          notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
+        }
+      ]
     }
   ]
 };

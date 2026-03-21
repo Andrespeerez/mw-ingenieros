@@ -9,7 +9,7 @@ const Tooltip = ({ children, content }) => {
          onMouseLeave={() => setIsVisible(false)}>
       {children}
       {isVisible && (
-        <div className="absolute z-50 p-2 mt-2 text-sm text-green-500 bg-black border border-green-500 rounded shadow-lg w-64">
+        <div className="absolute z-50 p-3 mt-2 text-xs text-green-400 bg-black border border-yellow-500 rounded shadow-lg w-72 max-h-64 overflow-y-auto">
           {content}
         </div>
       )}
