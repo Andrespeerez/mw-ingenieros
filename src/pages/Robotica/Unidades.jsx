@@ -1,48 +1,52 @@
-import React from 'react'
-import Page from '../../components/Page'
+import React, { useState } from 'react';
+import Page from '../../components/Page';
+import VehicleCard from '../../components/VehicleCard';
+import VehicleModal from '../../components/VehicleModal';
+import { droids } from '../../data/droids';
 
 export default function Unidades() {
+  const [activeTab, setActiveTab] = useState('robotsCiviles');
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
+
+  const tabs = [
+    { id: 'robotsCiviles', label: 'Robots Civiles' },
+    { id: 'robotsSeparatistas', label: 'Robots Separatistas' }
+  ];
+
   return (
-    <Page title="UNIDADES">
+    <Page title="UNIDADES ROBOTICAS">
       <div className="p-5 bg-panel border border-border mb-6">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-green-500">{'>'}</span>
-          <span className="text-yellow-400">[INFO]</span>
-          <span className="text-green-700">PENDIENTE DE CARGAR</span>
+        <div className="flex gap-2 mb-6">
+          {tabs.map(tab => (
+            <button
+              key={tab.id}
+              className={`px-4 py-2 border ${
+                activeTab === tab.id
+                  ? 'bg-green-500 text-black'
+                  : 'bg-panel text-green-500 border-border hover:border-green-500'
+              }`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        <p className="mb-4 pl-6 text-green-700">
-          {'>'} Registro de unidades roboticas bajo mando GAR.
-        </p>
-
-        <div className="pl-6">
-          <p className="text-green-500 mb-3">
-            {'>'} Unidades clasificadas:
-          </p>
-          <ul className="list-none p-0 m-0 pl-4">
-            <li className="flex items-center gap-3 mb-2">
-              <span className="text-green-500">{'->'}</span>
-              <span className="text-green-700">BX-Series Droid</span>
-            </li>
-            <li className="flex items-center gap-3 mb-2">
-              <span className="text-green-500">{'->'}</span>
-              <span className="text-green-700">DSD1 Dwarf Spider Droid</span>
-            </li>
-            <li className="flex items-center gap-3 mb-2">
-              <span className="text-green-500">{'->'}</span>
-              <span className="text-green-700">MTT Mobile Battle Tank</span>
-            </li>
-            <li className="flex items-center gap-3 mb-2">
-              <span className="text-green-500">{'->'}</span>
-              <span className="text-green-700">STAP</span>
-            </li>
-            <li className="flex items-center gap-3 mb-2">
-              <span className="text-green-500">{'->'}</span>
-              <span className="text-green-700">Droideka</span>
-            </li>
-          </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {(droids[activeTab] || []).map(vehicle => (
+            <VehicleCard
+              key={vehicle.id}
+              vehicle={vehicle}
+              onClick={setSelectedVehicle}
+            />
+          ))}
         </div>
       </div>
+
+      <VehicleModal
+        vehicle={selectedVehicle}
+        onClose={() => setSelectedVehicle(null)}
+      />
     </Page>
-  )
+  );
 }
