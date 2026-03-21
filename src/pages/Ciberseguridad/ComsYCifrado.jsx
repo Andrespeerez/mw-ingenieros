@@ -1,6 +1,28 @@
 import React, { useState } from 'react'
 import Page from '../../components/Page'
 import Accordion from '../../components/Accordion'
+import CryptoIO from '../../components/CryptoIO'
+import EnigmaSimplificado from '../../components/EnigmaSimplificado'
+import { 
+  textToBinary, 
+  binaryToText, 
+  textToHex, 
+  hexToText,
+  textToUtf8Hex, 
+  utf8HexToText,
+  textToUtf16Hex, 
+  utf16HexToText,
+  textToBase64, 
+  base64ToText,
+  textToMorse,
+  morseToText
+} from '../../utils/cryptoUtils'
+import { 
+  vigenereEncrypt, 
+  vigenereDecrypt,
+  phalanxEncrypt,
+  phalanxDecrypt
+} from '../../utils/cipherUtils'
 
 export default function ComsYCifrado() {
   const [activeTab, setActiveTab] = useState('info')
@@ -147,84 +169,75 @@ function Codificacion() {
 
       <div className="space-y-2">
         <Accordion title="Binario">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               El lenguaje fundamental de todas las computadoras. La informacion se almacena en 0 y 1 (bits), agrupados en bloques traducidos mediante un diccionario.
             </p>
-            <div className="bg-black/50 p-3 border border-green-900">
-              <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
-              <p className="text-green-600 text-xs">Caracteres -> Bits -> Diccionario -> Datos concretos</p>
-            </div>
+            <CryptoIO
+              encodeFn={textToBinary}
+              decodeFn={binaryToText}
+              placeholder="Escribe para convertir a binario..."
+            />
           </div>
         </Accordion>
 
         <Accordion title="Hexadecimal">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               Forma mas compacta de representar secuencias binarias. Usa 16 simbolos: 0-9 y a-f.
             </p>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-black/50 p-3 border border-green-900">
-                <p className="text-yellow-500 text-xs">Binario</p>
-                <p className="text-green-400 font-mono">0000 0000</p>
-              </div>
-              <div className="bg-black/50 p-3 border border-green-900">
-                <p className="text-yellow-500 text-xs">Hexadecimal</p>
-                <p className="text-green-400 font-mono">00</p>
-              </div>
-              <div className="bg-black/50 p-3 border border-green-900">
-                <p className="text-yellow-500 text-xs">Binario</p>
-                <p className="text-green-400 font-mono">1111 1111</p>
-              </div>
-              <div className="bg-black/50 p-3 border border-green-900">
-                <p className="text-yellow-500 text-xs">Hexadecimal</p>
-                <p className="text-green-400 font-mono">FF</p>
+            <div className="bg-black/50 p-3 border border-green-900 mb-3">
+              <p className="text-yellow-500 text-xs mb-1">Referencia rapida:</p>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div><span className="text-green-500">0000</span> = <span className="text-green-400 font-mono">00</span></div>
+                <div><span className="text-green-500">1111</span> = <span className="text-green-400 font-mono">FF</span></div>
+                <div><span className="text-green-500">0001</span> = <span className="text-green-400 font-mono">01</span></div>
+                <div><span className="text-green-500">1010</span> = <span className="text-green-400 font-mono">0A</span></div>
               </div>
             </div>
+            <CryptoIO
+              encodeFn={textToHex}
+              decodeFn={hexToText}
+              placeholder="Escribe para convertir a hexadecimal..."
+            />
           </div>
         </Accordion>
 
         <Accordion title="UTF-8">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               Codificacion de caracteres a bytes (8 bits). Caracteres comunes usan 1 byte, los menos frecuentes usan multiples bytes.
             </p>
-            <div className="bg-black/50 p-3 border border-green-900">
-              <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
-              <p className="text-green-600 mb-2">'a' -> 01100001 (binario)</p>
-              <p className="text-yellow-500 text-xs">Mensaje en hexadecimal:</p>
-              <p className="text-green-600 font-mono text-xs break-all">
-                4573746520657320756e206d656e73616a65206861207369646f20636f646966696361646f20656e205554462d382e
-              </p>
-            </div>
             <p className="text-green-600 text-xs">
               Ventaja: eficiencia en almacenamiento para textos con caracteres ASCII. Compatible con UTF-8 original.
             </p>
+            <CryptoIO
+              encodeFn={textToUtf8Hex}
+              decodeFn={utf8HexToText}
+              placeholder="Escribe para convertir a UTF-8 hex..."
+            />
           </div>
         </Accordion>
 
         <Accordion title="UTF-16">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               Sistema de 16 bits con soporte para varios sistemas de escritura de la galaxia. Cada caracter se transforma a 16 bits.
             </p>
-            <div className="bg-black/50 p-3 border border-green-900">
-              <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
-              <p className="text-green-600 mb-2">'a' -> 0000000001100001 (binario)</p>
-              <p className="text-yellow-500 text-xs">Expresado en hexadecimal:</p>
-              <p className="text-green-600 font-mono text-xs break-all">
-                fffe450073007400650020006d0065006e00730061006a00650020006800610020007300690064006f00200063006f0064006900660069006300610064006f00200065006e0020005500540046002d00310036002e002000530069002000650073007400e100730020006c006500790065006e0064006f0020006500730074006f002c002000660065006c00690063006900640061006400650073002e
-              </p>
-            </div>
+            <CryptoIO
+              encodeFn={textToUtf16Hex}
+              decodeFn={utf16HexToText}
+              placeholder="Escribe para convertir a UTF-16 hex..."
+            />
           </div>
         </Accordion>
 
         <Accordion title="Base64">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               Convierte datos binarios en caracteres ASCII. Permite representar cualquier tipo de informacion binaria.
             </p>
-            <div className="bg-black/50 p-3 border border-green-900">
+            <div className="bg-black/50 p-3 border border-green-900 mb-3">
               <p className="text-yellow-500 text-xs mb-1">Casos de uso:</p>
               <ul className="text-green-600 text-xs space-y-1">
                 <li>-> Transmisiones que no aceptan binario</li>
@@ -232,25 +245,32 @@ function Codificacion() {
                 <li>-> Representar texto en formato portable</li>
               </ul>
             </div>
-            <p className="text-green-600 text-xs">
-              A menudo hay transmisiones que no aceptan mensajes en binario y es necesario codificarlos de otra forma.
-            </p>
+            <CryptoIO
+              encodeFn={textToBase64}
+              decodeFn={base64ToText}
+              placeholder="Escribe para codificar en Base64..."
+            />
           </div>
         </Accordion>
 
         <Accordion title="Codigo Morse">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               Sistema basado en puntos (.) y rayas (-). Sistema binario con diccionario propio.
             </p>
-            <div className="bg-black/50 p-3 border border-green-900">
+            <div className="bg-black/50 p-3 border border-green-900 mb-3">
               <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
-              <p className="text-green-400 text-lg mb-2">S O S</p>
-              <p className="text-green-600 font-mono">... --- ...</p>
+              <p className="text-green-400 text-lg mb-1">S O S</p>
+              <p className="text-green-500 font-mono">... --- ...</p>
               <p className="text-green-600 text-xs mt-2">
                 Palabras separadas con doble barra (//). Letras separadas con espacio.
               </p>
             </div>
+            <CryptoIO
+              encodeFn={textToMorse}
+              decodeFn={morseToText}
+              placeholder="Escribe para convertir a Morse..."
+            />
           </div>
         </Accordion>
       </div>
@@ -259,6 +279,27 @@ function Codificacion() {
 }
 
 function Encriptacion() {
+  const [vigEncrypt, setVigEncrypt] = useState({ cipher: '', salt: '', iv: '' });
+  const [vigDecrypt, setVigDecrypt] = useState('');
+
+  const handlePhalanxEncrypt = async (plaintext, key) => {
+    if (!plaintext || !key) return { cipher: '', salt: '', iv: '' };
+    try {
+      return await phalanxEncrypt(plaintext, key);
+    } catch (e) {
+      return { cipher: 'Error: ' + e.message, salt: '', iv: '' };
+    }
+  };
+
+  const handlePhalanxDecrypt = async (cipher, key, salt, iv) => {
+    if (!cipher || !key || !salt || !iv) return 'Se requiere cipher, clave, salt e IV';
+    try {
+      return await phalanxDecrypt(cipher, key, salt, iv);
+    } catch (e) {
+      return 'Error: ' + e.message;
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
@@ -270,56 +311,60 @@ function Encriptacion() {
 
       <div className="space-y-2">
         <Accordion title="VIG-9 [Sistema Vigenere]">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               Metodo de codificacion que emplea una clave compartida para desplazar cada caracter. La clave se repite ciclicamente.
             </p>
             <p className="text-green-600 text-xs">
               Seguridad muy baja. Se pueden distinguir palabras y patrones para deducir la clave.
             </p>
-            <div className="bg-black/50 p-3 border border-green-900">
-              <p className="text-yellow-500 text-xs mb-2">Ejemplo:</p>
-              <div className="space-y-1 text-xs">
-                <p><span className="text-mint-400">Mensaje Original:</span> Base segura establecida</p>
-                <p><span className="text-mint-400">Clave:</span> republica</p>
-                <p><span className="text-yellow-500">Resultado:</span> tEiX dMIUiE XUeIELUGXWB</p>
-              </div>
-            </div>
+            <CryptoIO
+              encodeFn={(text, key) => vigenereEncrypt(text, key || 'republica')}
+              decodeFn={(text, key) => vigenereDecrypt(text, key || 'republica')}
+              decodeRequiresKey={true}
+              keyLabel="Clave VIG-9"
+              placeholder="Escribe el mensaje a cifrar..."
+            />
           </div>
         </Accordion>
 
         <Accordion title="PHALANX-CORE [AES-GCM]">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               Sistema avanzado de grado militar. Asegura confidencialidad, integridad y autenticidad.
             </p>
             <p className="text-green-600 text-xs">
               Si el enemigo modifica un solo bit del mensaje, se rompe el sello de autenticidad y se invalida.
             </p>
-            <div className="bg-black/50 p-3 border border-green-900 space-y-2">
+            <div className="bg-black/50 p-3 border border-green-900 mb-3 space-y-1">
               <p className="text-yellow-500 text-xs">Componentes:</p>
-              <div className="text-xs space-y-1">
-                <p><span className="text-mint-400">Clave:</span> Compartida entre emisor y receptor</p>
-                <p><span className="text-mint-400">Nonce:</span> Unico por mensaje, generado automaticamente</p>
-                <p><span className="text-mint-400">Tag:</span> Verifica integridad, detecta manipulacion</p>
-              </div>
+              <p className="text-green-600 text-xs"><span className="text-mint-400">Clave:</span> Compartida entre emisor y receptor</p>
+              <p className="text-green-600 text-xs"><span className="text-mint-400">Nonce:</span> Unico por mensaje, generado automaticamente</p>
+              <p className="text-green-600 text-xs"><span className="text-mint-400">Tag:</span> Verifica integridad, detecta manipulacion</p>
             </div>
-            <div className="bg-black/50 p-3 border border-green-900">
-              <p className="text-yellow-500 text-xs mb-2">Ejemplo:</p>
-              <div className="text-xs space-y-1">
-                <p><span className="text-mint-400">Mensaje Original:</span> Base segura establecida</p>
-                <p><span className="text-mint-400">Clave:</span> republica</p>
-                <p><span className="text-yellow-500">Cifrado:</span> OHgv6Fr3bpHEZgsCkyxGC3s/ObL8Fe0=</p>
-                <p><span className="text-yellow-500">Nonce:</span> /EHZn4Yv+PtqaMMN</p>
-                <p><span className="text-yellow-500">TAG:</span> riKViFHYJMlGxvBbNqa7hg==</p>
-              </div>
-            </div>
+            <CryptoIO
+              encodeFn={handlePhalanxEncrypt}
+              decodeFn={handlePhalanxDecrypt}
+              decodeRequiresKey={true}
+              keyLabel="Clave PHALANX-CORE"
+              placeholder="Escribe el mensaje a cifrar..."
+              isAsync={true}
+            />
+          </div>
+        </Accordion>
+
+        <Accordion title="Enigma Simplificada">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
+              Sistema de cifrado con rotores y transposicion. Cada caracter se procesa a traves de rotores configurables.
+            </p>
+            <EnigmaSimplificado />
           </div>
         </Accordion>
 
         <Accordion title="Mensajes Enemigos - KARD-52">
-          <div className="space-y-3 text-sm">
-            <p className="text-green-500">
+          <div className="space-y-3">
+            <p className="text-green-500 text-sm">
               El enemigo emplea sus propios sistemas de codificacion y encriptacion. Es un area de investigacion activa.
             </p>
             <div className="bg-red-900/30 p-3 border border-red-600/50">
