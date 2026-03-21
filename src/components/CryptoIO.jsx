@@ -6,7 +6,8 @@ export default function CryptoIO({
   decodeRequiresKey = false,
   keyLabel = 'Clave',
   placeholder = 'Escribe aqui...',
-  isAsync = false 
+  isAsync = false,
+  showDecryptFields = false 
 }) {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -43,12 +44,17 @@ export default function CryptoIO({
     setError('');
     try {
       if (isAsync) {
-        if (!key || !salt || !iv) {
-          setError('Se requiere clave, salt e IV para descifrar');
-          return;
+        if (showDecryptFields) {
+          if (!key || !salt || !iv) {
+            setError('Se requiere clave, salt e IV para descifrar');
+            return;
+          }
+          const result = await decodeFn(input, key, salt, iv);
+          setOutput(result);
+        } else {
+          const result = await decodeFn(input, key, salt, iv);
+          setOutput(result);
         }
-        const result = await decodeFn(input, key, salt, iv);
-        setOutput(result);
       } else {
         setOutput(decodeFn(input, key));
         setSalt('');
@@ -98,15 +104,27 @@ export default function CryptoIO({
         </div>
       </div>
 
-      {isAsync && salt && iv && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-          <div>
-            <span className="text-yellow-500">Salt: </span>
-            <span className="text-green-600 font-mono break-all">{salt}</span>
+      {isAsync && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className="flex flex-col gap-1">
+            <label className="text-yellow-500 text-xs">Salt {showDecryptFields && '(requerido)'}</label>
+            <input
+              type="text"
+              value={salt}
+              onChange={(e) => setSalt(e.target.value)}
+              placeholder={showDecryptFields ? "Salt del mensaje..." : "Se genera automaticamente"}
+              className="w-full p-2 bg-black text-green-500 border border-green-900 rounded text-xs"
+            />
           </div>
-          <div>
-            <span className="text-yellow-500">IV: </span>
-            <span className="text-green-600 font-mono break-all">{iv}</span>
+          <div className="flex flex-col gap-1">
+            <label className="text-yellow-500 text-xs">IV {showDecryptFields && '(requerido)'}</label>
+            <input
+              type="text"
+              value={iv}
+              onChange={(e) => setIv(e.target.value)}
+              placeholder={showDecryptFields ? "IV del mensaje..." : "Se genera automaticamente"}
+              className="w-full p-2 bg-black text-green-500 border border-green-900 rounded text-xs"
+            />
           </div>
         </div>
       )}

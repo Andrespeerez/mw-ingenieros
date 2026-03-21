@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Page from '../../components/Page'
 import Accordion from '../../components/Accordion'
 import CryptoIO from '../../components/CryptoIO'
-import EnigmaSimplificado from '../../components/EnigmaSimplificado'
 import { 
   textToBinary, 
   binaryToText, 
@@ -93,7 +92,7 @@ function InfoGeneral() {
         <ul className="list-none ml-4 space-y-1">
           <li className="text-green-500 text-sm">-> Establecer lineas de comunicacion</li>
           <li className="text-green-500 text-sm">-> Codificar mensajes para evitar intercepciones</li>
-          <li className="text-green-500 text-sm">-> Detectar alteraciones o sellos rotos en transmisiones falsas</li>
+          <li className="text-green-500 text-sm">-&GT; Detectar alteraciones o sellos rotos en transmisiones falsas</li>
           <li className="text-green-500 text-sm">-> Usar cifrados de nivel basico y avanzado</li>
         </ul>
       </div>
@@ -279,9 +278,6 @@ function Codificacion() {
 }
 
 function Encriptacion() {
-  const [vigEncrypt, setVigEncrypt] = useState({ cipher: '', salt: '', iv: '' });
-  const [vigDecrypt, setVigDecrypt] = useState('');
-
   const handlePhalanxEncrypt = async (plaintext, key) => {
     if (!plaintext || !key) return { cipher: '', salt: '', iv: '' };
     try {
@@ -349,16 +345,8 @@ function Encriptacion() {
               keyLabel="Clave PHALANX-CORE"
               placeholder="Escribe el mensaje a cifrar..."
               isAsync={true}
+              showDecryptFields={true}
             />
-          </div>
-        </Accordion>
-
-        <Accordion title="Enigma Simplificada">
-          <div className="space-y-3">
-            <p className="text-green-500 text-sm">
-              Sistema de cifrado con rotores y transposicion. Cada caracter se procesa a traves de rotores configurables.
-            </p>
-            <EnigmaSimplificado />
           </div>
         </Accordion>
 
