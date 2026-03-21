@@ -17,6 +17,59 @@ export const vehicles = {
       notas: 'Posee blindaje muy grueso y resistente. Es un tanque aéreo capaz de transportar tropas de forma segura. En algunas variantes dispone de 2 artilleros laterales, a parte de piloto y copiloto. No dispone de propulsores FTL.',
       reparacion: [
         {
+          titulo: "Blindaje dañado",
+          piezasNecesarias: ["Planchas de Duracero"],
+          nivelDificultad: "Bajo",
+          herramientas: ["Soldador de plasma"],
+          notas: "Es una aleación muy común y fácil de sustituir."
+        },
+        {
+          titulo: "Repulsores Antigravitatorios dañado",
+          piezasNecesarias: ["Malla de Repulsores Antigravitatorios", "Electrónica"],
+          nivelDificultad: "Medio",
+          herramientas: ["Soldador de plasma", "Soldador para electrónica", "Testers", "PDA con módulo de recalibrado"],
+          notas: "Componente crítico que requiere recalibrarlo después de instalarlo."
+        },
+        {
+          titulo: "Propulsión Iones dañado",
+          piezasNecesarias: ["Motor de Iones Modelo LAAT (sustitución)", "Electrónica"],
+          nivelDificultad: "Medio",
+          herramientas: ["Soldador de plasma", "Soldador para electrónica", "Multitool"],
+          notas: "Comprobar inyectores de material combustible y temperaturas de operación antes."
+        },
+        {
+          titulo: "Gimballs de Cañon Láser dañados",
+          piezasNecesarias: ["Condensador de energía", "Servomotores"],
+          nivelDificultad: "Medio",
+          herramientas: ["Soldador para electrónica", "Multitool"],
+          notas: "En caso de que estén inservibles, requerirá sustituir el cañon completo junto con sus capacitores."
+        },
+        {
+          titulo: "Lanzador de Misiles dañado",
+          piezasNecesarias: ["EP-750X Lanzador de Misiles", "Electrónica"],
+          nivelDificultad: "Medio",
+          herramientas: ["Soldador para electrónica", "Multitool"],
+          notas: ""
+        },
+      ]
+    },
+    {
+      id: 'LAAT/c',
+      nombre: 'LAAT/c',
+      tipoRol: 'Transporte de Vehículos',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774090746/laat-c_keg8tb.png',
+      fabricante: 'Ingeniería Pesada Rothana',
+      dimensiones: '17.69m x 28.8m x 6.94m',
+      caracteristicas: [
+        { titulo: "Velocidad", content: ["Velocidad Atmosférica: 620 km/hora", "Aceleración: 2.83 G"] },
+        { titulo: "Sistemas de Propulsión", content: ["Motores Subluz: 2x Motores de Iones traseros", "Repulsores VTOL: Matriz de Repulsorer de Antigravedad ventrales"] },
+        { titulo: "Armamento", content: ["3x Torretas Antiinfantería", "Lanzamisiles armados con 8x cohetes aire-aire"] },
+        { titulo: "Sistemas", content: ["Abrazadera magnética"] },
+      ],
+      tripulacion: "2 tripulantes",
+      notas: 'Dispone de un par de brazos magnéticos que permite transportar infinidad de vehículos. No dispone de propulsores FTL.',
+      reparacion: [
+        {
           titulo: "Reparación de Repulsores",
           piezasNecesarias: ["Repulsores"],
           nivelDificultad: "Medio",
