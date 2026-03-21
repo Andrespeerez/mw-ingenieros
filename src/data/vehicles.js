@@ -51,6 +51,17 @@ export const vehicles = {
           herramientas: ["Soldador para electrónica", "Multitool"],
           notas: ""
         },
+      ],
+      desguace: [
+        { nombre: "Chasis LAAT", tipo: "esencial" },
+        { nombre: "Malla de Repulsores Antigravitatorios", tipo: "necesaria" },
+        { nombre: "Motores de iones LAAT", tipo: "necesaria" },
+        { nombre: "Gimballs de Cañón Láser", tipo: "necesaria" },
+        { nombre: "Torretas de Rayo Láser Focalizado", tipo: "necesaria" },
+        { nombre: "EP-750X Lanzador de Misiles", tipo: "necesaria" },
+        { nombre: "Electrónica", tipo: "comun" },
+        { nombre: "Engranajes", tipo: "comun" },
+        { nombre: "Blindaje", tipo: "comun" }
       ]
     },
     {
@@ -76,6 +87,16 @@ export const vehicles = {
           herramientas: ["Llave Inglesa"],
           notas: "Se pueden extraer 2 Repulsores en buen estado."
         }
+      ],
+      desguace: [
+        { nombre: "Chasis LAAT", tipo: "esencial" },
+        { nombre: "Malla de Repulsores Antigravitatorios", tipo: "necesaria" },
+        { nombre: "Motores de iones LAAT", tipo: "necesaria" },
+        { nombre: "Gimballs de Cañón Láser", tipo: "necesaria" },
+        { nombre: "Abrazaderas magnéticas", tipo: "necesaria" },
+        { nombre: "Electrónica", tipo: "comun" },
+        { nombre: "Engranajes", tipo: "comun" },
+        { nombre: "Blindaje", tipo: "comun" }
       ]
     },
     {
@@ -108,12 +129,21 @@ export const vehicles = {
           herramientas: ["Destornillador sónico"],
           notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
         }
+      ],
+      desguace: [
+        { nombre: "Chasis ARC-170", tipo: "esencial" },
+        { nombre: "Motor de Iones", tipo: "necesaria" },
+        { nombre: "Hipermotor Clase 1.5", tipo: "necesaria" },
+        { nombre: "Generador de Escudos", tipo: "necesaria" },
+        { nombre: "Cañones Láser medianos", tipo: "necesaria" },
+        { nombre: "Alerones-S", tipo: "necesaria" },
+        { nombre: "Servomotores", tipo: "comun" }
       ]
     },
     {
       id: 'V-19',
       nombre: 'V-19 Torrent',
-      tipoRol: 'Caza Estelar Pesado',
+      tipoRol: 'Caza Estelar',
       img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774041508/v-19-torrent_ipnoor.png',
       fabricante: 'Industrias Incom',
       dimensiones: '20m x 15m',
@@ -124,7 +154,7 @@ export const vehicles = {
         { titulo: "Sistemas", content: ["Alerones-S"] },
       ],
       tripulacion: "1",
-      notas: 'Esta nave puede ser operada por 3 personas, pero las funciones del copiloto pueden ser suplidas por un astrodroide. El puesto de artillero es imprescindible ya que esta nave es poco maniobrable y suele verse sobrepasada por naves más rápidas y maniobrables.',
+      notas: 'Caza rápido y ágil, ideal para escoltas y apoyo cercano.',
       reparacion: [
         {
           titulo: "Mantenimiento de Motores Subluz",
@@ -132,14 +162,16 @@ export const vehicles = {
           nivelDificultad: "Alto",
           herramientas: ["Soldador", "Analizador"],
           notas: "Precisión crítica en la alineación de inyectores."
-        },
-        {
-          titulo: "Desguace de Escudos",
-          piezasNecesarias: ["Generador de Escudos"],
-          nivelDificultad: "Medio",
-          herramientas: ["Destornillador sónico"],
-          notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
         }
+      ],
+      desguace: [
+        { nombre: "Chasis V-19", tipo: "esencial" },
+        { nombre: "Motor de Iones", tipo: "necesaria" },
+        { nombre: "Cañones Láser Ligeros", tipo: "necesaria" },
+        { nombre: "Alerones-S", tipo: "necesaria" },
+        { nombre: "Servomotores", tipo: "comun" },
+        { nombre: "Electrónica", tipo: "comun" },
+        { nombre: "Blindaje", tipo: "comun" }
       ]
     },
     {
@@ -156,10 +188,155 @@ export const vehicles = {
         { titulo: "Sistemas", content: ["Escudos Deflectores: 800 petaWats", "Sensores: ANs 5d Largo Alcance (escaneo), PG-7u corto rango (búsqueda)"] },
       ],
       tripulacion: "2",
-      notas: 'Muy poco maniobrable. Requiere de un astromecánico para operar sensores y calcular rutas de hiperespacio.'
+      notas: 'Muy poco maniobrable. Requiere de un astromecánico para operar sensores y calcular rutas de hiperespacio.',
+      reparacion: [
+        {
+          titulo: "Mantenimiento de Motores Subluz",
+          piezasNecesarias: ["Motor Subluz"],
+          nivelDificultad: "Alto",
+          herramientas: ["Soldador", "Analizador"],
+          notas: "Precisión crítica en la alineación de inyectores."
+        }
+      ],
+      desguace: [
+        { nombre: "Chasis Ala-Y", tipo: "esencial" },
+        { nombre: "Hipermotor Clase 2", tipo: "necesaria" },
+        { nombre: "Motor de Iones", tipo: "necesaria" },
+        { nombre: "Cañones láser medianos", tipo: "necesaria" },
+        { nombre: "Cañones de iones dobles ligeros", tipo: "necesaria" },
+        { nombre: "Lanzador de Torpedos de Protones MG7", tipo: "necesaria" },
+        { nombre: "Circuitería", tipo: "comun" },
+        { nombre: "Componentes de navegación", tipo: "comun" }
+      ]
     },
   ],
   terrestres: [
+    {
+      id: 'barc-speeder',
+      nombre: 'Barc Speeder',
+      tipoRol: 'Vehículo de Reconocimiento',
+      img: 'https://placehold.co/200x150/000000/00FF00?text=BARC',
+      fabricante: 'Ingeniería Rotativa',
+      dimensiones: '3.2m',
+      caracteristicas: [
+        { titulo: "Propulsión", content: ["Repulsores Antigravedad"] },
+        { titulo: "Armamento", content: ["Cañones bláster ligeros"] },
+        { titulo: "Velocidad", content: ["500 km/h en superficies"] }
+      ],
+      tripulacion: "1 piloto",
+      notas: 'Vehículo rápido de reconocimiento y escolta.',
+      reparacion: [
+        {
+          titulo: "Repulsores dañados",
+          piezasNecesarias: ["Repulsores Antigravedad"],
+          nivelDificultad: "Medio",
+          herramientas: ["Multitool", "Soldador de plasma"],
+          notas: "Verificar calibración tras instalación."
+        }
+      ],
+      desguace: [
+        { nombre: "Chasis Barc Speeder", tipo: "esencial" },
+        { nombre: "Cañones bláster ligeros Barc", tipo: "necesaria" },
+        { nombre: "Repulsores Antigravedad de Speeders Civiles", tipo: "comun" }
+      ]
+    },
+    {
+      id: 'tx-130',
+      nombre: 'TX-130',
+      tipoRol: 'Tanque de Combate',
+      img: 'https://placehold.co/200x150/000000/00FF00?text=TX-130',
+      fabricante: 'Haor Chall Engineering',
+      dimensiones: '6.5m',
+      caracteristicas: [
+        { titulo: "Propulsión", content: ["Repulsores Antigravedad"] },
+        { titulo: "Armamento", content: ["2x Cañones láser duales pesados", "Proyector de escudos Exo-Shell 3"] },
+        { titulo: "Blindaje", content: ["Blindaje ablativo ligero"] }
+      ],
+      tripulacion: "2 (piloto + artillero)",
+      notas: 'Tanque rápido y ágil para flanqueos.',
+      reparacion: [
+        {
+          titulo: "Proyector de escudos dañado",
+          piezasNecesarias: ["Proyector de escudos Exo-Shell 3"],
+          nivelDificultad: "Alto",
+          herramientas: ["Soldador de plasma", "Multitool"],
+          notas: "Requiere recalibración completa del sistema."
+        }
+      ],
+      desguace: [
+        { nombre: "Chasis TX-130", tipo: "esencial" },
+        { nombre: "Repulsores Antigravedad", tipo: "necesaria" },
+        { nombre: "Proyector de escudos Exo-Shell 3", tipo: "necesaria" },
+        { nombre: "Cañones láser duales pesados", tipo: "necesaria" },
+        { nombre: "Blindaje ablativo ligero", tipo: "comun" },
+        { nombre: "Electrónica", tipo: "comun" }
+      ]
+    },
+    {
+      id: 'at-rt',
+      nombre: 'AT-RT',
+      tipoRol: 'Caminante de Reconocimiento',
+      img: 'https://placehold.co/200x150/000000/00FF00?text=AT-RT',
+      fabricante: 'Industrias Rothana',
+      dimensiones: '3.2m',
+      caracteristicas: [
+        { titulo: "Locomoción", content: ["2 patas mecánicas con actuadores"] },
+        { titulo: "Armamento", content: ["1x Cañón Láser mounted", "1x Generador de Rayo Tractor focalizado"] },
+        { titulo: "Tripulación", content: ["1 conductor"] }
+      ],
+      tripulacion: "1",
+      notas: 'Caminante ligero de reconocimiento. Muy rápido pero frágil.',
+      reparacion: [
+        {
+          titulo: "Actuadores de pata dañados",
+          piezasNecesarias: ["Actuadores de pierna"],
+          nivelDificultad: "Alto",
+          herramientas: ["Multitool", "Soldador de plasma"],
+          notas: "Precisión mecánica crítica."
+        }
+      ],
+      desguace: [
+        { nombre: "Chasis AT-RT", tipo: "esencial" },
+        { nombre: "Cañón Láser", tipo: "necesaria" },
+        { nombre: "Generadores de Rayo Tractor focalizados", tipo: "necesaria" },
+        { nombre: "Actuadores", tipo: "comun" },
+        { nombre: "Engranajes", tipo: "comun" },
+        { nombre: "Sistemas hidráulicos", tipo: "comun" }
+      ]
+    },
+    {
+      id: 'at-te',
+      nombre: 'AT-TE',
+      tipoRol: 'Caminante de Asalto',
+      img: 'https://placehold.co/200x150/000000/00FF00?text=AT-TE',
+      fabricante: 'Industrias Rothana',
+      dimensiones: '13.2m',
+      caracteristicas: [
+        { titulo: "Locomoción", content: ["6 patas con actuadores e hidráulicos"] },
+        { titulo: "Armamento", content: ["1x Torreta de Láseres Pesados Maad-21", "1x Cañón propulsor de masa Firefont 04", "5x Cañones bláster", "Generadores de Rayo Tractor focalizados"] },
+        { titulo: "Blindaje", content: ["Blindaje compuesto de matriz de duracero"] }
+      ],
+      tripulacion: "6 (piloto + copiloto + artilleros)",
+      notas: 'Tanque de caminante pesado. Excelente fuego de cobertura.',
+      reparacion: [
+        {
+          titulo: "Torreta principal dañada",
+          piezasNecesarias: ["Torreta Maad-21"],
+          nivelDificultad: "Muy Alto",
+          herramientas: ["Grúa", "Soldador de plasma", "Multitool"],
+          notas: "Se requieren al menos 2 técnicos."
+        }
+      ],
+      desguace: [
+        { nombre: "Chasis AT-TE", tipo: "esencial" },
+        { nombre: "Torreta de Láseres Pesados Maad-21", tipo: "necesaria" },
+        { nombre: "Cañón propulsor de masa Firefont 04", tipo: "necesaria" },
+        { nombre: "Generadores de Rayo Tractor focalizados", tipo: "necesaria" },
+        { nombre: "Actuadores", tipo: "comun" },
+        { nombre: "Engranajes", tipo: "comun" },
+        { nombre: "Sistemas hidráulicos", tipo: "comun" }
+      ]
+    },
     {
       id: 'terr-01',
       nombre: 'Tanque Recon X1',
@@ -176,19 +353,19 @@ export const vehicles = {
       notas: 'Excelente para terrenos difíciles.',
       reparacion: [
         {
-          titulo: "Mantenimiento de Motores Subluz",
-          piezasNecesarias: ["Motor Subluz"],
+          titulo: "Mantenimiento de Motores",
+          piezasNecesarias: ["Motor"],
           nivelDificultad: "Alto",
           herramientas: ["Soldador", "Analizador"],
           notas: "Precisión crítica en la alineación de inyectores."
-        },
-        {
-          titulo: "Desguace de Escudos",
-          piezasNecesarias: ["Generador de Escudos"],
-          nivelDificultad: "Medio",
-          herramientas: ["Destornillador sónico"],
-          notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
         }
+      ],
+      desguace: [
+        { nombre: "Chasis Recon X1", tipo: "esencial" },
+        { nombre: "Motor diesel-eléctrico", tipo: "necesaria" },
+        { nombre: "Cañón automático 30mm", tipo: "necesaria" },
+        { nombre: "Radar de corto alcance", tipo: "necesaria" },
+        { nombre: "Electrónica", tipo: "comun" }
       ]
     }
   ],
@@ -220,6 +397,16 @@ export const vehicles = {
           herramientas: ["Destornillador sónico"],
           notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
         }
+      ],
+      desguace: [
+        { nombre: "Chasis Venator", tipo: "esencial" },
+        { nombre: "Motores de iones", tipo: "necesaria" },
+        { nombre: "Hangar deci-mol", tipo: "necesaria" },
+        { nombre: "Escudos deflectores", tipo: "necesaria" },
+        { nombre: "Torretas láser", tipo: "necesaria" },
+        { nombre: "Sistemas de soporte vital", tipo: "necesaria" },
+        { nombre: "Electrónica", tipo: "comun" },
+        { nombre: "Engranajes", tipo: "comun" }
       ]
     }
   ]

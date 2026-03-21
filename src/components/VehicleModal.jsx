@@ -51,6 +51,63 @@ export default function VehicleModal({ vehicle, onClose }) {
     );
   };
 
+  const renderPiezas = () => {
+    if (!vehicle.desguace || !Array.isArray(vehicle.desguace)) {
+      return <p className="text-green-700">Información de piezas no disponible.</p>;
+    }
+    
+    const esenciales = vehicle.desguace.filter(p => p.tipo === 'esencial');
+    const necesarias = vehicle.desguace.filter(p => p.tipo === 'necesaria');
+    const comunes = vehicle.desguace.filter(p => p.tipo === 'comun');
+
+    return (
+      <div className="space-y-4">
+        <p className="text-green-600 text-xs mb-3">
+          {'>>'} Componentes recuperables de este vehículo. Los recambios comunes tienen abundancia en cualquier taller.
+        </p>
+
+        {esenciales.length > 0 && (
+          <div>
+            <h4 className="text-yellow-500 font-bold text-sm mb-2">[*] Esenciales</h4>
+            <div className="space-y-1">
+              {esenciales.map((item, index) => (
+                <div key={index} className="bg-terminal-bg/50 p-2 border border-yellow-600/50">
+                  <span className="text-yellow-500 font-bold">{item.nombre}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {necesarias.length > 0 && (
+          <div>
+            <h4 className="text-green-500 font-bold text-sm mb-2">[*] Necesarias</h4>
+            <div className="space-y-1">
+              {necesarias.map((item, index) => (
+                <div key={index} className="bg-terminal-bg/50 p-2 border border-green-600/50">
+                  <span className="text-green-500 font-semibold">{item.nombre}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {comunes.length > 0 && (
+          <div>
+            <h4 className="text-mint-500 font-bold text-sm mb-2">[*] Recambios Comunes</h4>
+            <div className="space-y-1">
+              {comunes.map((item, index) => (
+                <div key={index} className="bg-terminal-bg/20 p-2 border border-mint-600/50">
+                  <span className="text-mint-400">{item.nombre}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const renderCaracteristicas = (caracteristicas) => {
     if (!Array.isArray(caracteristicas)) return null;
     return caracteristicas.map((item, index) => (
@@ -80,11 +137,19 @@ export default function VehicleModal({ vehicle, onClose }) {
             className={`text-sm ${activeTab === 'repair' ? 'text-green-500 font-bold border-b border-green-500' : 'text-green-700'}`} 
             onClick={() => setActiveTab('repair')}
           >
-            [REPARACIÓN/DESGUAZE]
+            [REPARACIÓN]
+          </button>
+          <button 
+            className={`text-sm ${activeTab === 'piezas' ? 'text-green-500 font-bold border-b border-green-500' : 'text-green-700'}`} 
+            onClick={() => setActiveTab('piezas')}
+          >
+            [PIEZAS]
           </button>
         </div>
 
-        {activeTab === 'info' ? renderInfo() : renderReparacion()}
+        {activeTab === 'info' && renderInfo()}
+        {activeTab === 'repair' && renderReparacion()}
+        {activeTab === 'piezas' && renderPiezas()}
       </div>
     </div>
   );
