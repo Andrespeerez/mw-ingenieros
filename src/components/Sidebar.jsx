@@ -1,16 +1,21 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-export default function Sidebar({ items, currentIndex, onNavigate }) {
+export default function Sidebar({ items, currentIndex, onNavigate, onClose }) {
   const location = useLocation()
   let flatIndex = 0
 
   return (
-    <aside className="w-72 h-full bg-panel border-r border-border flex flex-col flex-shrink-0 overflow-hidden">
-      <div className="p-4 border-b border-border">
+    <aside className="w-72 h-full bg-black border-r border-border flex flex-col flex-shrink-0 overflow-hidden">
+      <div className="p-4 border-b border-border flex justify-between items-center">
         <span className="text-green-500 text-xs tracking-widest">
           [ MENU PRINCIPAL ]
         </span>
+        {onClose && (
+          <button onClick={onClose} className="text-green-500 text-xs border border-green-500 px-2 py-1">
+            [X]
+          </button>
+        )}
       </div>
 
       <nav className="flex-1 overflow-auto p-3">

@@ -102,11 +102,12 @@ export default function TerminalLayout() {
         {/* Mobile sidebar: overlay when opened via hamburger */}
         {sidebarOpen && (
           <>
-            <div className="md:hidden fixed inset-0 bg-black/70 z-40" onClick={() => setSidebarOpen(false)} />
-            <aside className="md:hidden fixed top-0 left-0 w-72 h-full bg-panel z-50 p-4">
+            <div className="md:hidden fixed inset-0 bg-black/90 z-40" onClick={() => setSidebarOpen(false)} />
+            <aside className="md:hidden fixed top-0 left-0 w-72 h-full bg-black z-50">
               <Sidebar
                 items={menuConfig}
                 currentIndex={selectedIndex}
+                onClose={() => setSidebarOpen(false)}
                 onNavigate={(index) => {
                   setSelectedIndex(index)
                   if (window.innerWidth < 768) setSidebarOpen(false)
