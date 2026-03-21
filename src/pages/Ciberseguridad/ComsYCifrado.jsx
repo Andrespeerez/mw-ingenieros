@@ -1,228 +1,347 @@
-import React, { useState, useEffect } from 'react'
-import EnigmaSimplificado from '../../components/EnigmaSimplificado'
+import React, { useState } from 'react'
 import Page from '../../components/Page'
+import Accordion from '../../components/Accordion'
 
 export default function ComsYCifrado() {
-  const [aPassword, setAPassword] = useState('')
-  const [aesPlain, setAesPlain] = useState('Hello world')
-  const [aesCipher, setAesCipher] = useState('')
-  const [aesIv, setAesIv] = useState('')
-  const [aesSalt, setAesSalt] = useState('')
+  const [activeTab, setActiveTab] = useState('info')
 
-  const [rsaPair, setRsaPair] = useState(null)
-  const [rsaPlain, setRsaPlain] = useState('Hello RSA')
-  const [rsaCipher, setRsaCipher] = useState('')
-  const [rsaDecoded, setRsaDecoded] = useState('')
+  const tabs = [
+    { id: 'info', label: 'Info General' },
+    { id: 'codificacion', label: 'Codificacion' },
+    { id: 'encriptacion', label: 'Encriptacion' }
+  ]
 
-  const [recipientPublicKeyPEM, setRecipientPublicKeyPEM] = useState('')
-  const [recipientPublicKey, setRecipientPublicKey] = useState(null)
-  const [publicKeyPem, setPublicKeyPem] = useState('')
-  const [privateKeyPem, setPrivateKeyPem] = useState('')
-  
-  const [openSection, setOpenSection] = useState('simetrico')
-
-  const AccordionItem = ({ title, id, children }) => (
-    <div className="border border-border mb-4 bg-panel">
-      <button
-        onClick={() => setOpenSection(openSection === id ? null : id)}
-        className="w-full text-left p-4 flex justify-between items-center text-green-500 hover:bg-black/20"
-      >
-        <span className="font-bold">{title}</span>
-        <span>{openSection === id ? '[-]' : '[+]'}</span>
-      </button>
-      {openSection === id && <div className="p-4 border-t border-border">{children}</div>}
-    </div>
-  )
-
-  const fromBase64 = (b64) => {
-    const binary = typeof window !== 'undefined' ? atob(b64) : Buffer.from(b64, 'base64').toString('binary')
-    const len = binary.length
-    const bytes = new Uint8Array(len)
-    for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i)
-    return bytes.buffer
-  }
-
-  const importRecipientPublicKeyFromPEM = async (pem) => {
-    const pemLines = pem.replace(/-----BEGIN PUBLIC KEY-----|-----END PUBLIC KEY-----|\n|\r/g, '').trim()
-    const binary = atob(pemLines)
-    const bytes = new Uint8Array(binary.split('').map(ch => ch.charCodeAt(0)))
-    const key = await crypto.subtle.importKey('spki', bytes, { name: 'RSA-OAEP', hash: 'SHA-256' }, false, ['encrypt'])
-    setRecipientPublicKey(key)
-    setRecipientPublicKeyPEM(pem)
-  }
-
-  const exportPrivateKeyPEM = async () => {
-    if (!rsaPair?.privateKey) return ''
-    const pkcs8 = await crypto.subtle.exportKey('pkcs8', rsaPair.privateKey)
-    const b64 = btoa(String.fromCharCode(...new Uint8Array(pkcs8)))
-    const lines = b64.match(/.{1,64}/g) || []
-    return `-----BEGIN PRIVATE KEY-----\n${lines.join('\n')}\n-----END PRIVATE KEY-----`
-  }
-
-  const exportPublicKeyPEM = async () => {
-    if (!rsaPair?.publicKey) return ''
-    const spki = await crypto.subtle.exportKey('spki', rsaPair.publicKey)
-    const b64 = btoa(String.fromCharCode(...new Uint8Array(spki)))
-    const lines = b64.match(/.{1,64}/g) || []
-    return `-----BEGIN PUBLIC KEY-----\n${lines.join('\n')}\n-----END PUBLIC KEY-----`
-  }
-
-  useEffect(() => {
-    let cancelled = false
-    const loadKeys = async () => {
-      try {
-        if (rsaPair && rsaPair.publicKey) {
-          const pem = await exportPublicKeyPEM()
-          if (!cancelled) setPublicKeyPem(pem)
-        }
-        if (rsaPair && rsaPair.privateKey) {
-          const pem = await exportPrivateKeyPEM()
-          if (!cancelled) setPrivateKeyPem(pem)
-        }
-      } catch (err) {
-        console.error(err)
-      }
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'info':
+        return <InfoGeneral />
+      case 'codificacion':
+        return <Codificacion />
+      case 'encriptacion':
+        return <Encriptacion />
+      default:
+        return null
     }
-    loadKeys()
-    return () => { cancelled = true }
-  }, [rsaPair])
-
-  const encryptAES = async () => {
-    try {
-      const salt = crypto.getRandomValues(new Uint8Array(16))
-      const iv = crypto.getRandomValues(new Uint8Array(12))
-      const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(aPassword), 'PBKDF2', false, ['deriveKey'])
-      const key = await crypto.subtle.deriveKey(
-        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
-        keyMaterial,
-        { name: 'AES-GCM', length: 256 },
-        false,
-        ['encrypt']
-      )
-      const encoded = new TextEncoder().encode(aesPlain)
-      const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded)
-      const ctBytes = new Uint8Array(ct)
-      const ctB64 = btoa(String.fromCharCode(...ctBytes))
-      setAesCipher(ctB64)
-      setAesIv(btoa(String.fromCharCode(...iv)))
-      setAesSalt(btoa(String.fromCharCode(...salt)))
-    } catch (e) {
-      console.error(e)
-    }
-  }
-  const decryptAES = async () => {
-    try {
-      const salt = new Uint8Array(fromBase64(aesSalt))
-      const iv = new Uint8Array(fromBase64(aesIv))
-      const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(aPassword), 'PBKDF2', false, ['deriveKey'])
-      const key = await crypto.subtle.deriveKey(
-        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
-        keyMaterial,
-        { name: 'AES-GCM', length: 256 },
-        false,
-        ['decrypt']
-      )
-      const ct = new Uint8Array(fromBase64(aesCipher))
-      const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct)
-      const text = new TextDecoder().decode(pt)
-      setAesPlain(text)
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  const generateRSA = async () => {
-    const pair = await crypto.subtle.generateKey({ name: 'RSA-OAEP', modulusLength: 2048, publicExponent: new Uint8Array([1,0,1]), hash: 'SHA-256' }, true, ['encrypt', 'decrypt'])
-    setRsaPair(pair)
-  }
-  
-  const rsaEncrypt = async () => {
-    const key = recipientPublicKey || rsaPair?.publicKey
-    if (!key) return
-    const enc = new TextEncoder().encode(rsaPlain)
-    const ct = await crypto.subtle.encrypt({ name: 'RSA-OAEP' }, key, enc)
-    setRsaCipher(btoa(String.fromCharCode(...new Uint8Array(ct))))
-  }
-  const rsaDecrypt = async () => {
-    if (!rsaPair?.privateKey) return
-    const data = new Uint8Array(fromBase64(rsaCipher))
-    const pt = await crypto.subtle.decrypt({ name: 'RSA-OAEP' }, rsaPair.privateKey, data)
-    setRsaDecoded(new TextDecoder().decode(pt))
   }
 
   return (
     <Page title="COMS Y CIFRADO">
-      
-      {/* BLOQUE 1: CIFRADO SIMÉTRICO - AES-GCM */}
-      <AccordionItem title="[ CIFRADO SIMÉTRICO - AES-GCM ]" id="simetrico">
-        <div className="space-y-4">
-          <div className="flex flex-col gap-2">
-            <label className="text-green-500">Contraseña</label>
-            <input placeholder="Password" value={aPassword} onChange={e=>setAPassword(e.target.value)} className="w-full p-2 bg-black text-text border border-border" />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-green-500">Texto Plano</label>
-            <textarea rows={3} placeholder="Plaintext" value={aesPlain} onChange={e=>setAesPlain(e.target.value)} className="w-full p-2 bg-black text-text border border-border" />
-          </div>
-          <div className="flex gap-2">
-            <button onClick={encryptAES} className="px-3 py-1 border border-green-500 text-green-500 rounded">Encrypt</button>
-            <button onClick={decryptAES} className="px-3 py-1 border border-green-500 text-green-500 rounded">Decrypt</button>
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-green-500">Texto Cifrado</label>
-            <textarea rows={2} placeholder="Ciphertext" value={aesCipher} readOnly className="w-full p-2 bg-black text-text border border-border" />
-          </div>
+      <div className="p-5 bg-panel border border-border mb-6">
+        <div className="flex gap-2 mb-6 flex-wrap">
+          {tabs.map(tab => (
+            <button
+              key={tab.id}
+              className={`px-4 py-2 border ${
+                activeTab === tab.id
+                  ? 'bg-green-500 text-black'
+                  : 'bg-panel text-green-500 border-border hover:border-green-500'
+              }`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
-      </AccordionItem>
 
-      {/* BLOQUE 2: CIFRADO ASIMÉTRICO - RSA-OAEP */}
-      <AccordionItem title="[ CIFRADO ASIMÉTRICO - RSA-OAEP ]" id="asimetrico">
-        <div className="space-y-4">
-          <div className="flex flex-col gap-2">
-            <label className="text-green-500">Texto Plano</label>
-            <textarea rows={3} placeholder="Plaintext" value={rsaPlain} onChange={e=>setRsaPlain(e.target.value)} className="w-full p-2 bg-black text-text border border-border" />
-          </div>
-          <div className="flex gap-2">
-            <button onClick={rsaEncrypt} className="px-3 py-1 border border-green-500 text-green-500 rounded">Encrypt</button>
-            <button onClick={rsaDecrypt} className="px-3 py-1 border border-green-500 text-green-500 rounded">Decrypt</button>
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-green-500">Texto Cifrado</label>
-            <textarea rows={2} placeholder="Ciphertext" value={rsaCipher} readOnly className="w-full p-2 bg-black text-text border border-border" />
-          </div>
-        </div>
-      </AccordionItem>
-
-      {/* BLOQUE 3: GESTIÓN DE CLAVES RSA */}
-      <AccordionItem title="[ GESTIÓN DE CLAVES RSA ]" id="claves">
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-green-500">Public Key PEM</label>
-              <textarea rows={4} value={publicKeyPem} onChange={e=>setPublicKeyPem(e.target.value)} className="w-full bg-black text-text border border-border p-2" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-green-500">Private Key PEM</label>
-              <textarea rows={4} value={privateKeyPem} onChange={e=>setPrivateKeyPem(e.target.value)} className="w-full bg-black text-text border border-border p-2" />
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <button onClick={generateRSA} className="px-3 py-1 border border-green-500 text-green-500 rounded">Generar Par de Claves</button>
-          </div>
-          
-          <div className="pt-4 border-t border-border">
-            <label className="text-green-500">Clave Pública Destinatario</label>
-            <textarea rows={4} value={recipientPublicKeyPEM} onChange={e=>setRecipientPublicKeyPEM(e.target.value)} className="w-full bg-black text-text border border-border p-2 mt-1" />
-            <button onClick={()=>importRecipientPublicKeyFromPEM(recipientPublicKeyPEM)} className="mt-2 px-3 py-1 border border-green-500 text-green-500 rounded">Cargar Destinatario</button>
-          </div>
-        </div>
-      </AccordionItem>
-
-      {/* BLOQUE 4: CIFRADO ENIGMA */}
-      <AccordionItem title="[ CIFRADO ENIGMA ]" id="enigma">
-        <EnigmaSimplificado />
-      </AccordionItem>
-
+        {renderContent()}
+      </div>
     </Page>
+  )
+}
+
+function InfoGeneral() {
+  return (
+    <div className="space-y-6">
+      <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
+        <p className="text-green-400 text-sm mb-2">
+          Las comunicaciones son el nervio central de cualquier operacion estrategica.
+        </p>
+        <p className="text-green-400 text-sm">
+          Recuerda: el enemigo escucha, el enemigo intercepta, y si no ciframos bien nuestros mensajes, el enemigo vence.
+        </p>
+      </div>
+
+      <div>
+        <p className="text-green-500 text-sm mb-4">
+          Necesitamos clones capaces de entender las comunicaciones de forma integral: el medio fisico de transmision, 
+          los equipos de emision y recepcion, y la encodificacion del mensaje.
+        </p>
+
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} En este manual aprenderas a:</h3>
+        <ul className="list-none ml-4 space-y-1">
+          <li className="text-green-500 text-sm">-> Establecer lineas de comunicacion</li>
+          <li className="text-green-500 text-sm">-> Codificar mensajes para evitar intercepciones</li>
+          <li className="text-green-500 text-sm">-> Detectar alteraciones o sellos rotos en transmisiones falsas</li>
+          <li className="text-green-500 text-sm">-> Usar cifrados de nivel basico y avanzado</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Tipos de Transmision</h3>
+
+        <div className="space-y-4">
+          <div className="bg-terminal-bg/30 p-4 border border-green-900">
+            <h4 className="text-green-400 font-bold mb-2">Transmision Por Comlinks</h4>
+            <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+              <div><span className="text-yellow-500">Alcance:</span> <span className="text-green-500">50km</span></div>
+              <div><span className="text-yellow-500">Medio:</span> <span className="text-green-500">Electromagnetico</span></div>
+              <div><span className="text-yellow-500">Velocidad:</span> <span className="text-green-500">Luz</span></div>
+              <div><span className="text-yellow-500">Precio:</span> <span className="text-green-500">Muy baratas</span></div>
+            </div>
+            <p className="text-green-600 text-xs mb-2">
+              Solo se necesita un emisor y un receptor. Se usan dentro de un planeta o entre planeta y orbita.
+            </p>
+            <p className="text-green-600 text-xs">
+              Todos los clones tenemos un ComLink en nuestros cascos. Pueden ser interferidas por emisiones electromagneticas.
+            </p>
+          </div>
+
+          <div className="bg-terminal-bg/30 p-4 border border-green-900">
+            <h4 className="text-green-400 font-bold mb-2">Transmision por Subespacio</h4>
+            <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+              <div><span className="text-yellow-500">Alcance:</span> <span className="text-green-500">100 anos luz</span></div>
+              <div><span className="text-yellow-500">Medio:</span> <span className="text-green-500">Subespacio</span></div>
+              <div><span className="text-yellow-500">Velocidad:</span> <span className="text-green-500">Supraluz (casi instante)</span></div>
+              <div><span className="text-yellow-500">Precio:</span> <span className="text-green-500">Medio</span></div>
+            </div>
+            <p className="text-green-600 text-xs mb-2">
+              Emplea el subespacio para envios a velocidades superiores a la luz. Se pueden enviar senales a todo un sistema estelar instantaneamente.
+            </p>
+            <p className="text-green-600 text-xs">
+              Requiere equipamiento mas avanzado: reles de subespacio y terminales mas complejos. Una red conecta toda la galaxia pero Naboo a Coruscant puede tardar 1 semana.
+            </p>
+          </div>
+
+          <div className="bg-terminal-bg/30 p-4 border border-green-900">
+            <h4 className="text-green-400 font-bold mb-2">Transmisiones por HoloNet</h4>
+            <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+              <div><span className="text-yellow-500">Alcance:</span> <span className="text-green-500">Galaxia</span></div>
+              <div><span className="text-yellow-500">Medio:</span> <span className="text-green-500">Hiperespacio</span></div>
+              <div><span className="text-yellow-500">Velocidad:</span> <span className="text-green-500">Supraluz (casi instante)</span></div>
+              <div><span className="text-yellow-500">Precio:</span> <span className="text-green-500">Alto</span></div>
+            </div>
+            <p className="text-green-600 text-xs mb-2">
+              La forma de comunicacion mas rapida y segura. Comunicacion punto a punto, muy dificil de interceptar.
+            </p>
+            <p className="text-green-600 text-xs">
+              Requiere mucha energia. Normalmente la HoloNet envia a Subespacio para abaratar costes. Naves de guerra y bases importantes tienen transceptor propio.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Codificacion() {
+  return (
+    <div className="space-y-6">
+      <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
+        <p className="text-green-400 text-sm mb-2">
+          La codificacion transforma un mensaje en un formato estructurado para envio o interpretacion por sistemas electronicos.
+        </p>
+        <p className="text-green-600 text-xs">
+          No confundas codificacion con encriptacion: un mensaje codificado lo puede leer cualquiera, uno encriptado necesita clave.
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <Accordion title="Binario">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              El lenguaje fundamental de todas las computadoras. La informacion se almacena en 0 y 1 (bits), agrupados en bloques traducidos mediante un diccionario.
+            </p>
+            <div className="bg-black/50 p-3 border border-green-900">
+              <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
+              <p className="text-green-600 text-xs">Caracteres -> Bits -> Diccionario -> Datos concretos</p>
+            </div>
+          </div>
+        </Accordion>
+
+        <Accordion title="Hexadecimal">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              Forma mas compacta de representar secuencias binarias. Usa 16 simbolos: 0-9 y a-f.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-black/50 p-3 border border-green-900">
+                <p className="text-yellow-500 text-xs">Binario</p>
+                <p className="text-green-400 font-mono">0000 0000</p>
+              </div>
+              <div className="bg-black/50 p-3 border border-green-900">
+                <p className="text-yellow-500 text-xs">Hexadecimal</p>
+                <p className="text-green-400 font-mono">00</p>
+              </div>
+              <div className="bg-black/50 p-3 border border-green-900">
+                <p className="text-yellow-500 text-xs">Binario</p>
+                <p className="text-green-400 font-mono">1111 1111</p>
+              </div>
+              <div className="bg-black/50 p-3 border border-green-900">
+                <p className="text-yellow-500 text-xs">Hexadecimal</p>
+                <p className="text-green-400 font-mono">FF</p>
+              </div>
+            </div>
+          </div>
+        </Accordion>
+
+        <Accordion title="UTF-8">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              Codificacion de caracteres a bytes (8 bits). Caracteres comunes usan 1 byte, los menos frecuentes usan multiples bytes.
+            </p>
+            <div className="bg-black/50 p-3 border border-green-900">
+              <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
+              <p className="text-green-600 mb-2">'a' -> 01100001 (binario)</p>
+              <p className="text-yellow-500 text-xs">Mensaje en hexadecimal:</p>
+              <p className="text-green-600 font-mono text-xs break-all">
+                4573746520657320756e206d656e73616a65206861207369646f20636f646966696361646f20656e205554462d382e
+              </p>
+            </div>
+            <p className="text-green-600 text-xs">
+              Ventaja: eficiencia en almacenamiento para textos con caracteres ASCII. Compatible con UTF-8 original.
+            </p>
+          </div>
+        </Accordion>
+
+        <Accordion title="UTF-16">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              Sistema de 16 bits con soporte para varios sistemas de escritura de la galaxia. Cada caracter se transforma a 16 bits.
+            </p>
+            <div className="bg-black/50 p-3 border border-green-900">
+              <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
+              <p className="text-green-600 mb-2">'a' -> 0000000001100001 (binario)</p>
+              <p className="text-yellow-500 text-xs">Expresado en hexadecimal:</p>
+              <p className="text-green-600 font-mono text-xs break-all">
+                fffe450073007400650020006d0065006e00730061006a00650020006800610020007300690064006f00200063006f0064006900660069006300610064006f00200065006e0020005500540046002d00310036002e002000530069002000650073007400e100730020006c006500790065006e0064006f0020006500730074006f002c002000660065006c00690063006900640061006400650073002e
+              </p>
+            </div>
+          </div>
+        </Accordion>
+
+        <Accordion title="Base64">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              Convierte datos binarios en caracteres ASCII. Permite representar cualquier tipo de informacion binaria.
+            </p>
+            <div className="bg-black/50 p-3 border border-green-900">
+              <p className="text-yellow-500 text-xs mb-1">Casos de uso:</p>
+              <ul className="text-green-600 text-xs space-y-1">
+                <li>-> Transmisiones que no aceptan binario</li>
+                <li>-> Enviar imagenes o documentos</li>
+                <li>-> Representar texto en formato portable</li>
+              </ul>
+            </div>
+            <p className="text-green-600 text-xs">
+              A menudo hay transmisiones que no aceptan mensajes en binario y es necesario codificarlos de otra forma.
+            </p>
+          </div>
+        </Accordion>
+
+        <Accordion title="Codigo Morse">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              Sistema basado en puntos (.) y rayas (-). Sistema binario con diccionario propio.
+            </p>
+            <div className="bg-black/50 p-3 border border-green-900">
+              <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
+              <p className="text-green-400 text-lg mb-2">S O S</p>
+              <p className="text-green-600 font-mono">... --- ...</p>
+              <p className="text-green-600 text-xs mt-2">
+                Palabras separadas con doble barra (//). Letras separadas con espacio.
+              </p>
+            </div>
+          </div>
+        </Accordion>
+      </div>
+    </div>
+  )
+}
+
+function Encriptacion() {
+  return (
+    <div className="space-y-6">
+      <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
+        <p className="text-green-400 text-sm">
+          Los mensajes encriptados aportan seguridad mediante una clave conocida solo por emisor y receptor.
+          Dependiendo del sistema, la clave sera mas o menos segura.
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <Accordion title="VIG-9 [Sistema Vigenere]">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              Metodo de codificacion que emplea una clave compartida para desplazar cada caracter. La clave se repite ciclicamente.
+            </p>
+            <p className="text-green-600 text-xs">
+              Seguridad muy baja. Se pueden distinguir palabras y patrones para deducir la clave.
+            </p>
+            <div className="bg-black/50 p-3 border border-green-900">
+              <p className="text-yellow-500 text-xs mb-2">Ejemplo:</p>
+              <div className="space-y-1 text-xs">
+                <p><span className="text-mint-400">Mensaje Original:</span> Base segura establecida</p>
+                <p><span className="text-mint-400">Clave:</span> republica</p>
+                <p><span className="text-yellow-500">Resultado:</span> tEiX dMIUiE XUeIELUGXWB</p>
+              </div>
+            </div>
+          </div>
+        </Accordion>
+
+        <Accordion title="PHALANX-CORE [AES-GCM]">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              Sistema avanzado de grado militar. Asegura confidencialidad, integridad y autenticidad.
+            </p>
+            <p className="text-green-600 text-xs">
+              Si el enemigo modifica un solo bit del mensaje, se rompe el sello de autenticidad y se invalida.
+            </p>
+            <div className="bg-black/50 p-3 border border-green-900 space-y-2">
+              <p className="text-yellow-500 text-xs">Componentes:</p>
+              <div className="text-xs space-y-1">
+                <p><span className="text-mint-400">Clave:</span> Compartida entre emisor y receptor</p>
+                <p><span className="text-mint-400">Nonce:</span> Unico por mensaje, generado automaticamente</p>
+                <p><span className="text-mint-400">Tag:</span> Verifica integridad, detecta manipulacion</p>
+              </div>
+            </div>
+            <div className="bg-black/50 p-3 border border-green-900">
+              <p className="text-yellow-500 text-xs mb-2">Ejemplo:</p>
+              <div className="text-xs space-y-1">
+                <p><span className="text-mint-400">Mensaje Original:</span> Base segura establecida</p>
+                <p><span className="text-mint-400">Clave:</span> republica</p>
+                <p><span className="text-yellow-500">Cifrado:</span> OHgv6Fr3bpHEZgsCkyxGC3s/ObL8Fe0=</p>
+                <p><span className="text-yellow-500">Nonce:</span> /EHZn4Yv+PtqaMMN</p>
+                <p><span className="text-yellow-500">TAG:</span> riKViFHYJMlGxvBbNqa7hg==</p>
+              </div>
+            </div>
+          </div>
+        </Accordion>
+
+        <Accordion title="Mensajes Enemigos - KARD-52">
+          <div className="space-y-3 text-sm">
+            <p className="text-green-500">
+              El enemigo emplea sus propios sistemas de codificacion y encriptacion. Es un area de investigacion activa.
+            </p>
+            <div className="bg-red-900/30 p-3 border border-red-600/50">
+              <p className="text-yellow-500 text-xs mb-2">Sistema de Encriptacion Enemiga: KARD-52</p>
+              <p className="text-green-600 text-xs">
+                Desencriptar KARD-52 es practicamente imposible sin acceso a:
+              </p>
+              <ul className="text-green-600 text-xs mt-2 space-y-1">
+                <li>-> Diccionarios (rotores) exactos del enemigo</li>
+                <li>-> Configuracion de bloques</li>
+                <li>-> Patron de transposiciones</li>
+                <li>-> Clave de encriptacion</li>
+              </ul>
+            </div>
+            <div className="bg-yellow-900/30 p-3 border border-yellow-600/50">
+              <p className="text-yellow-400 text-xs">
+                Solicita apoyo a Inteligencia o la Flota ante cualquier intercepcion de comunicaciones KARD-52.
+              </p>
+            </div>
+          </div>
+        </Accordion>
+      </div>
+    </div>
   )
 }
