@@ -9,7 +9,7 @@ export default function ReglamentoBase() {
         <div className="flex items-center gap-3 mb-4">
           <span className="text-mint-500">{'> '}</span>
           <span className="text-yellow-500">[INFO]</span>
-          <span className="text-green-500">MANUAL DEL INGENIERO CLONADO</span>
+          <span className="text-green-500">MANUAL DEL INGENIERO CLON</span>
         </div>
 
         <p className="mb-6 pl-6 text-green-500 text-sm">
