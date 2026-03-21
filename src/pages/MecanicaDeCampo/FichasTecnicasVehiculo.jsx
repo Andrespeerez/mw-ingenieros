@@ -10,7 +10,8 @@ export default function FichasTecnicasVehiculo() {
 
   const tabs = [
     { id: 'terrestres', label: 'Terrestres' },
-    { id: 'naves', label: 'Naves' }
+    { id: 'naves', label: 'Naves' },
+    { id: 'navesCapitales', label: 'Naves Capitales' }
   ];
 
   return (
