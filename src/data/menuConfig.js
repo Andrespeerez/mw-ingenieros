@@ -27,6 +27,12 @@ const menu = [
       { path: '/robotica/protocolos', label: 'Protocolos' },
     ],
   },
+  {
+    section: 'Ingenieria',
+    items: [
+      { path: '/ingenieria/rol-pasivo', label: 'Rol Pasivo' },
+    ],
+  },
 ]
 
 export default menu

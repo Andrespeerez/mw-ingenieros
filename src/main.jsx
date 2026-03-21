@@ -13,6 +13,7 @@ import ComsYCifrado from './pages/Ciberseguridad/ComsYCifrado'
 import Hackeo from './pages/Ciberseguridad/Hackeo'
 import Unidades from './pages/Robotica/Unidades'
 import Protocolos from './pages/Robotica/Protocolos'
+import RolPasivo from './pages/Ingenieria/RolPasivo'
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
               <Route path="ciberseguridad/hackeo" element={<Hackeo />} />
               <Route path="robotica/unidades" element={<Unidades />} />
               <Route path="robotica/protocolos" element={<Protocolos />} />
+              <Route path="ingenieria/rol-pasivo" element={<RolPasivo />} />
             </Route>
           </Route>
           <Route path="*" element={<Navigate to="/login" />} />
