@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import Sidebar from './Sidebar'
+import CrtOverlay from './CrtOverlay'
+import TerminalButton from './TerminalButton'
 import menuConfig from '../data/menuConfig'
 import { useAuth } from '../auth/AuthContext'
 
@@ -57,30 +59,34 @@ export default function TerminalLayout() {
 
   return (
     <div className="fixed inset-0 flex flex-col bg-black font-mono overflow-hidden">
-      <header className="h-12 bg-panel border-b-2 border-green-500 flex items-center px-4 flex-shrink-0">
+      <CrtOverlay />
+      <header className="h-12 bg-panel border-b-2 border-green-500 flex items-center px-4 flex-shrink-0 relative z-50">
         {/* Hamburger button - only visible on mobile */}
-        <button
+        <TerminalButton
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="md:hidden mr-3 px-2 py-1 border border-green-500 text-green-500 bg-transparent cursor-pointer text-sm"
+          variant="ghost"
+          ariaLabel={sidebarOpen ? "Cerrar menú" : "Abrir menú"}
+          className="md:hidden mr-3"
         >
-          {sidebarOpen ? '[X]' : '[=]'}
-        </button>
+          {sidebarOpen ? 'X' : '='}
+        </TerminalButton>
 
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-4">
-            <span className="text-green-500 text-sm">{'>'} GRAN_EJERCITO_REPUBLICA</span>
+            <span className="text-green-500 text-sm terminal-glow">{'>'} GRAN_EJERCITO_REPUBLICA</span>
             {/* Separator and version only visible on desktop */}
             <span className="hidden md:inline text-border">|</span>
             <span className="hidden md:inline text-green-700 text-xs">TERMINAL_INGENIEROS_MW_V2.4</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-green-700 text-xs">OPERADOR: CT-001</span>
-            <button
+            <TerminalButton
               onClick={handleLogout}
-              className="px-4 py-1 text-xs text-green-500 border border-green-500 bg-transparent cursor-pointer"
+              variant="secondary"
+              ariaLabel="Cerrar sesión"
             >
-              [SALIR]
-            </button>
+              SALIR
+            </TerminalButton>
           </div>
         </div>
       </header>
