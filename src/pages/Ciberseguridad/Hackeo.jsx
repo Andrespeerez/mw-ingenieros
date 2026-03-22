@@ -85,9 +85,9 @@ function InfoGeneral() {
           <div className="bg-terminal-bg/30 p-3 border border-green-900">
             <h4 className="text-green-400 font-bold text-sm mb-1">Confidencialidad</h4>
             <ul className="text-green-600 text-xs space-y-1 ml-2">
-              <li>-> Trata la informacion con maxima confidencialidad operativa</li>
-              <li>-> No reveles codigos de acceso a personal no autorizado</li>
-              <li>-> Nunca accedas a sistemas sin autorizacion</li>
+              <li>-&gt; Trata la informacion con maxima confidencialidad operativa</li>
+              <li>-&gt; No reveles codigos de acceso a personal no autorizado</li>
+              <li>-&gt; Nunca accedas a sistemas sin autorizacion</li>
             </ul>
           </div>
 
@@ -99,8 +99,8 @@ function InfoGeneral() {
           <div className="bg-terminal-bg/30 p-3 border border-green-900">
             <h4 className="text-green-400 font-bold text-sm mb-1">Vigilancia</h4>
             <ul className="text-green-600 text-xs space-y-1 ml-2">
-              <li>-> Mantente permanentemente alerta a actividad anomala en redes y comunicaciones</li>
-              <li>-> Si detectas un acceso enemigo, acta rapido y cambia las claves de acceso</li>
+              <li>-&gt; Mantente permanentemente alerta a actividad anomala en redes y comunicaciones</li>
+              <li>-&gt; Si detectas un acceso enemigo, acta rapido y cambia las claves de acceso</li>
             </ul>
           </div>
 
@@ -263,126 +263,131 @@ function OperacionesOfensivas() {
         <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Fases de las Operaciones Ofensivas</h3>
         
         <div className="space-y-4">
-          <div className="bg-terminal-bg/30 p-4 border border-green-900">
-            <h4 className="text-green-400 font-bold text-sm mb-2">1. Planificacion y Reconocimiento</h4>
+          <div className="bg-green-900/30 p-4 border border-green-700 rounded">
+            <h4 className="text-green-400 font-bold text-sm mb-2">1. Diagnostico [COMPROBACION]</h4>
             <p className="text-green-600 text-xs mb-2">
-              Evaluamos el objetivo, recopilamos informacion y disenamos una estrategia.
+              Evaluar la seguridad del sistema objetivo. Solo el dado, sin modificadores.
             </p>
-            <ul className="text-green-600 text-xs space-y-1 mb-2">
-              <li>-> <span className="text-yellow-500">Evaluacion del Objetivo:</span> Civil, Militar, Industrial</li>
-              <li>-> <span className="text-yellow-500">Recopilacion de Informacion:</span> Escaneo pasivo, analisis de comunicaciones abiertas</li>
-              <li>-> <span className="text-yellow-500">Diseno de Estrategia:</span> Extraccion, Sabotaje, Anular Sistemas o Defensas</li>
-            </ul>
             <Tooltip content={
               <div className="space-y-2">
                 <p className="text-yellow-500 font-bold">[OOC]</p>
-                <p className="text-green-400 text-xs">Determina la dificultad del sistema objetivo.</p>
-                <p className="text-green-400 text-xs mt-1">Usa /me para comprobar si el sistema tiene seguridad y /dados para determinar dificultad.</p>
+                <p className="text-green-400 text-xs">Tirada de Estado: solo el dado.</p>
+                <p className="text-green-400 text-xs mt-1">Determina la dificultad del sistema.</p>
+                <div className="mt-2 pt-2 border-t border-green-700 space-y-1">
+                  <p className="text-green-400 text-xs">{'/me'} evalua la seguridad del sistema</p>
+                  <p className="text-green-400 text-xs">{'/dados'} {'->'} 60</p>
+                  <p className="text-green-400 text-xs">{'/do'} Seguridad robusta [Media: +60]</p>
+                </div>
                 <div className="mt-2 pt-2 border-t border-green-700">
-                  <p className="text-yellow-500 text-xs mb-1">Tabla de Diagnostico:</p>
-                  <table className="text-green-400 text-xs">
-                    <tr><td className="pr-2">x {'<'} 40:</td><td>Seguridad Muy Baja (40), 3 fallos</td></tr>
-                    <tr><td>40 {'<'} x {'<'} 60:</td><td>Seguridad Baja (50), 3 fallos</td></tr>
-                    <tr><td>60 {'<'} x {'<'} 90:</td><td>Seguridad Media (60), 3 fallos</td></tr>
-                    <tr><td>x {'>'} 90:</td><td>Seguridad Alta (60), 2 fallos</td></tr>
+                  <p className="text-yellow-500 text-xs mb-2">Tabla de Dificultad:</p>
+                  <table className="w-full text-green-400 text-xs">
+                    <thead>
+                      <tr className="border-b border-green-700">
+                        <th className="text-left py-1">Tirada</th>
+                        <th className="text-left py-1">Dificultad</th>
+                        <th className="text-left py-1">Fallos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td className="py-1">{'x < 40'}</td><td>Muy Baja (40)</td><td>3</td></tr>
+                      <tr><td className="py-1">{'40 < x < 60'}</td><td>Baja (50)</td><td>3</td></tr>
+                      <tr><td className="py-1">{'60 < x < 90'}</td><td>Media (60)</td><td>3</td></tr>
+                      <tr><td className="py-1">{'x > 90'}</td><td>Alta (60)</td><td>2</td></tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
             }>
               <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                Ver tabla de dificultades [OOC]
+                Ver mecanismo y tabla
               </span>
             </Tooltip>
           </div>
 
-          <div className="bg-terminal-bg/30 p-4 border border-green-900">
-            <h4 className="text-green-400 font-bold text-sm mb-2">2. Infiltracion</h4>
-            <p className="text-green-600 text-xs mb-2">
-              Establecimiento del primer punto de entrada en el sistema. Uso de exploits, insercion de codigo malicioso o robo de credenciales.
-            </p>
-            <p className="text-green-600 text-xs">
-              El objetivo es obtener acceso sin activar alarmas.
+          <div className="bg-yellow-900/30 p-4 border border-yellow-700 rounded">
+            <h4 className="text-yellow-400 font-bold text-sm mb-2">2. Infiltracion [ACCION vs Dificultad]</h4>
+            <p className="text-yellow-600 text-xs mb-2">
+              Explotar vulnerabilidades. Dado + Competencia vs Dificultad.
             </p>
             <Tooltip content={
               <div className="space-y-2">
                 <p className="text-yellow-500 font-bold">[OOC]</p>
-                <p className="text-green-400 text-xs">Tirada de Accion vs Dificultad + Competencia Ciberseguridad.</p>
-                <p className="text-green-400 text-xs mt-1">Si fallas 1 vez pierdes sigilo.</p>
-                <p className="text-green-400 text-xs">Sin fallos = expulsion del sistema.</p>
+                <p className="text-green-400 text-xs">Tirada de Accion: Dado + Competencia.</p>
+                <p className="text-green-400 text-xs mt-1">Superar la dificultad para tener exito.</p>
+                <p className="text-green-400 text-xs mt-1">Si fallas: pierdes un fallo permitido.</p>
+                <p className="text-red-400 text-xs mt-1">Sin fallos: expulsion del sistema.</p>
                 <div className="mt-2 pt-2 border-t border-green-700">
-                  <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
-                  <p className="text-green-400 text-xs font-mono">/me intenta superar el firewall (+10)</p>
-                  <p className="text-green-400 text-xs font-mono">/dados</p>
+                  <p className="text-yellow-500 text-xs mb-2">Ejemplo:</p>
+                  <table className="w-full text-green-400 text-xs">
+                    <tbody>
+                      <tr><td className="py-1">{'/me'} intenta explotar vulnerabilidad</td></tr>
+                      <tr><td className="py-1 text-cyan-400">{'/dados'} {'->'} 45 - 10 = 35</td></tr>
+                      <tr><td className="py-1 text-red-400">{'/do'} Detectado y bloqueado (35)</td></tr>
+                      <tr><td className="py-2 border-t border-green-800 mt-1">{'/me'} segunda intrusion</td></tr>
+                      <tr><td className="py-1 text-cyan-400">{'/dados'} {'->'} 75 - 10 = 65</td></tr>
+                      <tr><td className="py-1 text-green-400">{'/do'} Acceso concedido (65)</td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             }>
               <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                Ver mecanismo de tiradas [OOC]
+                Ver ejemplo completo
               </span>
             </Tooltip>
           </div>
 
-          <div className="bg-terminal-bg/30 p-4 border border-green-900">
-            <h4 className="text-green-400 font-bold text-sm mb-2">3. Acciones Maliciosas</h4>
-            <p className="text-green-600 text-xs mb-2">
-              Una vez con control, ejecutamos el objetivo:
+          <div className="bg-red-900/30 p-4 border border-red-700 rounded">
+            <h4 className="text-red-400 font-bold text-sm mb-2">3. Infeccion [ACCION vs Dificultad]</h4>
+            <p className="text-red-600 text-xs mb-2">
+              Ejecutar acciones maliciosas en el sistema.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div className="bg-black/50 p-2 border border-green-700">
-                <span className="text-yellow-500 text-xs">Descargar Archivos</span>
-                <p className="text-green-600 text-xs">Archivos al datapad</p>
-              </div>
-              <div className="bg-black/50 p-2 border border-green-700">
-                <span className="text-yellow-500 text-xs">Borrar/Modificar</span>
-                <p className="text-green-600 text-xs">Crear datos falsos</p>
-              </div>
-              <div className="bg-black/50 p-2 border border-green-700">
-                <span className="text-yellow-500 text-xs">Ransomware</span>
-                <p className="text-green-600 text-xs">Encriptar archivos</p>
-              </div>
-              <div className="bg-black/50 p-2 border border-green-700">
-                <span className="text-yellow-500 text-xs">Activar/Desactivar</span>
-                <p className="text-green-600 text-xs">Alarmas, puertas, etc.</p>
-              </div>
-            </div>
             <Tooltip content={
               <div className="space-y-2">
                 <p className="text-yellow-500 font-bold">[OOC]</p>
-                <p className="text-green-400 text-xs">Tirada de Accion vs Dificultad para cada accion.</p>
+                <p className="text-green-400 text-xs">Tirada de Accion: Dado + Competencia.</p>
+                <p className="text-green-400 text-xs mt-1">Acciones: Descargar, Borrar, Ransomware, Activar/Desactivar.</p>
                 <div className="mt-2 pt-2 border-t border-green-700">
-                  <p className="text-yellow-500 text-xs mb-1">Acciones Especiales:</p>
-                  <p className="text-green-400 text-xs">Atacar otro nodo: Navegar a otro segmento</p>
-                  <p className="text-green-400 text-xs">Escalar Privilegios: +10 dificultad, recupera fallos y +20 en tiradas</p>
+                  <p className="text-yellow-500 text-xs mb-2">Ejemplo:</p>
+                  <table className="w-full text-green-400 text-xs">
+                    <tbody>
+                      <tr><td className="py-1">{'/me'} intenta borrar los registros</td></tr>
+                      <tr><td className="py-1 text-cyan-400">{'/dados'} {'->'} 59 - 10 = 49</td></tr>
+                      <tr><td className="py-1 text-yellow-400">{'/do'} Alarmas activadas (49)</td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             }>
               <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                Ver tabla de acciones [OOC]
+                Ver ejemplo
               </span>
             </Tooltip>
           </div>
 
-          <div className="bg-terminal-bg/30 p-4 border border-green-900">
-            <h4 className="text-green-400 font-bold text-sm mb-2">4. Escalada de Privilegios <span className="text-yellow-600">(Opcional)</span></h4>
-            <p className="text-green-600 text-xs mb-2">
-              Obtener nivel de acceso superior (Administrador/Root) para facilitar acciones posteriores.
-            </p>
-            <p className="text-green-600 text-xs">
-              Si lo logras: recuperas todos los intentos y ganas +20 en tiradas.
+          <div className="bg-cyan-900/30 p-4 border border-cyan-700 rounded">
+            <h4 className="text-cyan-400 font-bold text-sm mb-2">4. Escalada (Opcional)</h4>
+            <p className="text-cyan-600 text-xs mb-2">
+              Obtener privilegios de Administrador. Recuperas fallos y +20 en tiradas.
             </p>
             <Tooltip content={
               <div className="space-y-2">
                 <p className="text-yellow-500 font-bold">[OOC]</p>
-                <p className="text-green-400 text-xs">Tirada de Accion vs Dificultad base +10 + Competencia.</p>
+                <p className="text-green-400 text-xs">Tirada de Accion: Dado + Competencia + 10.</p>
+                <p className="text-green-400 text-xs mt-1">Si superas: recuperas todos los fallos y +20.</p>
                 <div className="mt-2 pt-2 border-t border-green-700">
-                  <p className="text-yellow-500 text-xs mb-1">Ejemplo:</p>
-                  <p className="text-green-400 text-xs font-mono">/me intenta cambiar rol a admin (+10+10)</p>
-                  <p className="text-green-400 text-xs font-mono">/dados</p>
+                  <p className="text-yellow-500 text-xs mb-2">Ejemplo:</p>
+                  <table className="w-full text-green-400 text-xs">
+                    <tbody>
+                      <tr><td className="py-1">{'/me'} intenta cambiar rol a admin (+10+10)</td></tr>
+                      <tr><td className="py-1 text-cyan-400">{'/dados'} {'->'} [valor]</td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             }>
               <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                Ver mecanismo [OOC]
+                Ver mecanismo
               </span>
             </Tooltip>
           </div>
@@ -390,15 +395,14 @@ function OperacionesOfensivas() {
       </div>
 
       <div className="bg-yellow-900/30 p-4 border border-yellow-600/50">
-        <h4 className="text-yellow-400 font-bold text-sm mb-2">{'>>'} Alternativas si Fallamos</h4>
-        <p className="text-green-600 text-xs mb-2">
-          Un buen hacker no se rinde con facilidad. Alternatives:
+        <h4 className="text-yellow-400 font-bold text-sm mb-2">{'>>'} Recordatorio</h4>
+        <p className="text-green-600 text-xs">
+          Las <span className="text-green-400">COMPROBACIONES</span> usan solo el dado.
+          Las <span className="text-red-400">ACCIONES</span> usan Dado + Competencia vs Dificultad.
         </p>
-        <ul className="text-green-500 text-xs space-y-1">
-          <li>-> Manipular actuadores fisicamente (abrir puertas manualmente)</li>
-          <li>-> Robar discos de datos fisicos para desencriptar en lugar seguro</li>
-          <li>-> Obtener claves interrogando o enganando a alguien que las tenga</li>
-        </ul>
+        <p className="text-green-600 text-xs mt-2">
+          Si fallas, considera: manipular actuadores fisicamente, robar discos de datos, u obtener claves por otros medios.
+        </p>
       </div>
     </div>
   )
@@ -438,10 +442,10 @@ function OperacionesDefensivas() {
             Protocolos de respuesta inmediata para aislar los sistemas o segmentos de la red comprometidos.
           </p>
           <ul className="text-green-600 text-xs space-y-1">
-            <li>-> Evitar la propagacion del ataque</li>
-            <li>-> Limitar el acceso del adversario</li>
-            <li>-> Desconectar nodos comprometidos</li>
-            <li>-> Configurar firewalls</li>
+            <li>-&gt; Evitar la propagacion del ataque</li>
+            <li>-&gt; Limitar el acceso del adversario</li>
+            <li>-&gt; Desconectar nodos comprometidos</li>
+            <li>-&gt; Configurar firewalls</li>
           </ul>
           <Tooltip content={
             <div className="space-y-2">
@@ -462,9 +466,9 @@ function OperacionesDefensivas() {
             Investigacion detallada del incidente y elaboracion de informe indicando las vulnerabilidades usadas.
           </p>
           <ul className="text-green-600 text-xs space-y-1">
-            <li>-> Recuperar la red y los datos perdidos</li>
-            <li>-> Crear sistemas de seguridad contra ataques similares</li>
-            <li>-> Documentar el incidente para Inteligencia</li>
+            <li>-&gt; Recuperar la red y los datos perdidos</li>
+            <li>-&gt; Crear sistemas de seguridad contra ataques similares</li>
+            <li>-&gt; Documentar el incidente para Inteligencia</li>
           </ul>
           <Tooltip content={
             <div className="space-y-2">

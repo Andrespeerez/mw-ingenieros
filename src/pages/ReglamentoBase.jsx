@@ -135,10 +135,10 @@ export default function ReglamentoBase() {
             <span className="text-yellow-500">[Progresion de la Rama]</span>
           </div>
 
-          <p className="text-green-500 text-sm mb-2 pl-4">
+          <div className="text-green-500 text-sm mb-2 pl-4">
             {'>'} La rama de ingenieros se divide en niveles por areas.
             <Tooltip content={
-              <div>
+              <div className="text-xs">
                 <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
                 <p className="mb-2">Los niveles dan ventaja en tiradas de acciones.</p>
                 <p>Minimo nivel I para realizar tiradas.</p>
@@ -149,7 +149,7 @@ export default function ReglamentoBase() {
                 El nivel determina tu habilidad.
               </span>
             </Tooltip>
-          </p>
+          </div>
 
           <div className="pl-4 overflow-x-auto">
             <table className="w-full text-sm">
@@ -187,7 +187,7 @@ export default function ReglamentoBase() {
               <li className="text-green-500 text-sm">-&gt; Mecanico I</li>
             </ul>
             <Tooltip content={
-              <div>
+              <div className="text-xs">
                 <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
                 <p>Subiras de nivel mediante instrucciones y demostrando habilidades en campo.</p>
                 <p className="mt-2">Si abandonas la rama y vuelves, conservaras tus rangos.</p>

@@ -90,10 +90,10 @@ function InfoGeneral() {
 
         <h3 className="text-yellow-500 font-bold mb-3">{'>>'} En este manual aprenderas a:</h3>
         <ul className="list-none ml-4 space-y-1">
-          <li className="text-green-500 text-sm">-> Establecer lineas de comunicacion</li>
-          <li className="text-green-500 text-sm">-> Codificar mensajes para evitar intercepciones</li>
-          <li className="text-green-500 text-sm">-&GT; Detectar alteraciones o sellos rotos en transmisiones falsas</li>
-          <li className="text-green-500 text-sm">-> Usar cifrados de nivel basico y avanzado</li>
+          <li className="text-green-500 text-sm">-&gt; Establecer lineas de comunicacion</li>
+          <li className="text-green-500 text-sm">-&gt; Codificar mensajes para evitar intercepciones</li>
+          <li className="text-green-500 text-sm">-&gt; Detectar alteraciones o sellos rotos en transmisiones falsas</li>
+          <li className="text-green-500 text-sm">-&gt; Usar cifrados de nivel basico y avanzado</li>
         </ul>
       </div>
 
@@ -239,9 +239,9 @@ function Codificacion() {
             <div className="bg-black/50 p-3 border border-green-900 mb-3">
               <p className="text-yellow-500 text-xs mb-1">Casos de uso:</p>
               <ul className="text-green-600 text-xs space-y-1">
-                <li>-> Transmisiones que no aceptan binario</li>
-                <li>-> Enviar imagenes o documentos</li>
-                <li>-> Representar texto en formato portable</li>
+                <li>-&gt; Transmisiones que no aceptan binario</li>
+                <li>-&gt; Enviar imagenes o documentos</li>
+                <li>-&gt; Representar texto en formato portable</li>
               </ul>
             </div>
             <CryptoIO
@@ -361,10 +361,10 @@ function Encriptacion() {
                 Desencriptar KARD-52 es practicamente imposible sin acceso a:
               </p>
               <ul className="text-green-600 text-xs mt-2 space-y-1">
-                <li>-> Diccionarios (rotores) exactos del enemigo</li>
-                <li>-> Configuracion de bloques</li>
-                <li>-> Patron de transposiciones</li>
-                <li>-> Clave de encriptacion</li>
+                <li>-&gt; Diccionarios (rotores) exactos del enemigo</li>
+                <li>-&gt; Configuracion de bloques</li>
+                <li>-&gt; Patron de transposiciones</li>
+                <li>-&gt; Clave de encriptacion</li>
               </ul>
             </div>
             <div className="bg-yellow-900/30 p-3 border border-yellow-600/50">
