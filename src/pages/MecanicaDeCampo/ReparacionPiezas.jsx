@@ -256,38 +256,6 @@ function TareasMecanica() {
           </div>
         </div>
       </div>
-
-      <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Tipos de Tiradas</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <Tooltip content={<p className="text-green-400 text-xs w-64">Verificar integridad. Lanzar 1d100. Resultado alto = sistema en buen estado.</p>}>
-             <div className="bg-green-900/30 p-3 border border-green-700 rounded cursor-help">
-               <h4 className="text-green-400 font-bold text-xs mb-1">ESTADO</h4>
-               <p className="text-green-500 text-xs">Evaluar si algo funciona</p>
-             </div>
-          </Tooltip>
-          <Tooltip content={<p className="text-red-400 text-xs w-64">Evaluar daño. Lanzar 1d100. Resultado bajo = daño mínimo.</p>}>
-             <div className="bg-red-900/30 p-3 border border-red-700 rounded cursor-help">
-               <h4 className="text-red-400 font-bold text-xs mb-1">GRAVEDAD</h4>
-               <p className="text-red-500 text-xs">Evaluar daño</p>
-             </div>
-          </Tooltip>
-          <Tooltip content={<p className="text-yellow-400 text-xs w-64">Calibración. Lanzar 1d100. Resultado cercano a 50 = calibración ideal.</p>}>
-             <div className="bg-yellow-900/30 p-3 border border-yellow-700 rounded cursor-help">
-               <h4 className="text-yellow-400 font-bold text-xs mb-1">MEDICION</h4>
-               <p className="text-yellow-500 text-xs">Calibrar sistemas</p>
-             </div>
-          </Tooltip>
-        </div>
-      </div>
-
-      <div className="bg-terminal-bg/30 p-4 border border-green-900/50">
-        <h3 className="text-green-400 font-bold mb-2">{'>>>'} Recordatorio Operativo</h3>
-        <p className="text-green-500 text-xs">
-          Las COMPROBACIONES (Diagnóstico) usan únicamente el valor del dado.
-          Las ACCIONES (Reparación) requieren la aplicación del modificador de competencia al resultado del dado.
-        </p>
-      </div>
     </div>
   );
 }
