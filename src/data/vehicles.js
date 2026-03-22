@@ -15,43 +15,6 @@ export const vehicles = {
       ],
       tripulacion: "2-4 tripulantes, 22-30 pasajeros",
       notas: 'Posee blindaje muy grueso y resistente. Es un tanque aéreo capaz de transportar tropas de forma segura. En algunas variantes dispone de 2 artilleros laterales, a parte de piloto y copiloto. No dispone de propulsores FTL.',
-      reparacion: [
-        {
-          titulo: "Blindaje dañado",
-          piezasNecesarias: ["Planchas de Duracero"],
-          nivelDificultad: "Bajo",
-          herramientas: ["Soldador de plasma"],
-          notas: "Es una aleación muy común y fácil de sustituir."
-        },
-        {
-          titulo: "Repulsores Antigravitatorios dañado",
-          piezasNecesarias: ["Malla de Repulsores Antigravitatorios", "Electrónica"],
-          nivelDificultad: "Medio",
-          herramientas: ["Soldador de plasma", "Soldador para electrónica", "Testers", "PDA con módulo de recalibrado"],
-          notas: "Componente crítico que requiere recalibrarlo después de instalarlo."
-        },
-        {
-          titulo: "Propulsión Iones dañado",
-          piezasNecesarias: ["Motor de Iones Modelo LAAT (sustitución)", "Electrónica"],
-          nivelDificultad: "Medio",
-          herramientas: ["Soldador de plasma", "Soldador para electrónica", "Multitool"],
-          notas: "Comprobar inyectores de material combustible y temperaturas de operación antes."
-        },
-        {
-          titulo: "Gimballs de Cañon Láser dañados",
-          piezasNecesarias: ["Condensador de energía", "Servomotores"],
-          nivelDificultad: "Medio",
-          herramientas: ["Soldador para electrónica", "Multitool"],
-          notas: "En caso de que estén inservibles, requerirá sustituir el cañon completo junto con sus capacitores."
-        },
-        {
-          titulo: "Lanzador de Misiles dañado",
-          piezasNecesarias: ["EP-750X Lanzador de Misiles", "Electrónica"],
-          nivelDificultad: "Medio",
-          herramientas: ["Soldador para electrónica", "Multitool"],
-          notas: ""
-        },
-      ],
       desguace: [
         { nombre: "Chasis LAAT", tipo: "esencial" },
         { nombre: "Malla de Repulsores Antigravitatorios", tipo: "necesaria" },
@@ -79,15 +42,6 @@ export const vehicles = {
       ],
       tripulacion: "2 tripulantes",
       notas: 'Dispone de un par de brazos magnéticos que permite transportar infinidad de vehículos. No dispone de propulsores FTL.',
-      reparacion: [
-        {
-          titulo: "Reparación de Repulsores",
-          piezasNecesarias: ["Repulsores"],
-          nivelDificultad: "Medio",
-          herramientas: ["Llave Inglesa"],
-          notas: "Se pueden extraer 2 Repulsores en buen estado."
-        }
-      ],
       desguace: [
         { nombre: "Chasis LAAT", tipo: "esencial" },
         { nombre: "Malla de Repulsores Antigravitatorios", tipo: "necesaria" },
@@ -114,22 +68,6 @@ export const vehicles = {
       ],
       tripulacion: "3",
       notas: 'Esta nave puede ser operada por 3 personas, pero las funciones del copiloto pueden ser suplidas por un astrodroide. El puesto de artillero es imprescindible ya que esta nave es poco maniobrable y suele verse sobrepasada por naves más rápidas y maniobrables.',
-      reparacion: [
-        {
-          titulo: "Mantenimiento de Motores Subluz",
-          piezasNecesarias: ["Motor Subluz"],
-          nivelDificultad: "Alto",
-          herramientas: ["Soldador", "Analizador"],
-          notas: "Precisión crítica en la alineación de inyectores."
-        },
-        {
-          titulo: "Desguace de Escudos",
-          piezasNecesarias: ["Generador de Escudos"],
-          nivelDificultad: "Medio",
-          herramientas: ["Destornillador sónico"],
-          notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
-        }
-      ],
       desguace: [
         { nombre: "Chasis ARC-170", tipo: "esencial" },
         { nombre: "Motor de Iones", tipo: "necesaria" },
@@ -155,15 +93,6 @@ export const vehicles = {
       ],
       tripulacion: "1",
       notas: 'Caza rápido y ágil, ideal para escoltas y apoyo cercano.',
-      reparacion: [
-        {
-          titulo: "Mantenimiento de Motores Subluz",
-          piezasNecesarias: ["Motor Subluz"],
-          nivelDificultad: "Alto",
-          herramientas: ["Soldador", "Analizador"],
-          notas: "Precisión crítica en la alineación de inyectores."
-        }
-      ],
       desguace: [
         { nombre: "Chasis V-19", tipo: "esencial" },
         { nombre: "Motor de Iones", tipo: "necesaria" },
@@ -189,15 +118,6 @@ export const vehicles = {
       ],
       tripulacion: "2",
       notas: 'Muy poco maniobrable. Requiere de un astromecánico para operar sensores y calcular rutas de hiperespacio.',
-      reparacion: [
-        {
-          titulo: "Mantenimiento de Motores Subluz",
-          piezasNecesarias: ["Motor Subluz"],
-          nivelDificultad: "Alto",
-          herramientas: ["Soldador", "Analizador"],
-          notas: "Precisión crítica en la alineación de inyectores."
-        }
-      ],
       desguace: [
         { nombre: "Chasis Ala-Y", tipo: "esencial" },
         { nombre: "Hipermotor Clase 2", tipo: "necesaria" },
@@ -208,7 +128,7 @@ export const vehicles = {
         { nombre: "Circuitería", tipo: "comun" },
         { nombre: "Componentes de navegación", tipo: "comun" }
       ]
-    },
+    }
   ],
   terrestres: [
     {
@@ -225,15 +145,6 @@ export const vehicles = {
       ],
       tripulacion: "1 piloto",
       notas: 'Vehículo rápido de reconocimiento y escolta.',
-      reparacion: [
-        {
-          titulo: "Repulsores dañados",
-          piezasNecesarias: ["Repulsores Antigravedad"],
-          nivelDificultad: "Medio",
-          herramientas: ["Multitool", "Soldador de plasma"],
-          notas: "Verificar calibración tras instalación."
-        }
-      ],
       desguace: [
         { nombre: "Chasis Barc Speeder", tipo: "esencial" },
         { nombre: "Cañones bláster ligeros Barc", tipo: "necesaria" },
@@ -254,15 +165,6 @@ export const vehicles = {
       ],
       tripulacion: "2 (piloto + artillero)",
       notas: 'Tanque rápido y ágil para flanqueos.',
-      reparacion: [
-        {
-          titulo: "Proyector de escudos dañado",
-          piezasNecesarias: ["Proyector de escudos Exo-Shell 3"],
-          nivelDificultad: "Alto",
-          herramientas: ["Soldador de plasma", "Multitool"],
-          notas: "Requiere recalibración completa del sistema."
-        }
-      ],
       desguace: [
         { nombre: "Chasis TX-130", tipo: "esencial" },
         { nombre: "Repulsores Antigravedad", tipo: "necesaria" },
@@ -286,15 +188,6 @@ export const vehicles = {
       ],
       tripulacion: "1",
       notas: 'Caminante ligero de reconocimiento. Muy rápido pero frágil.',
-      reparacion: [
-        {
-          titulo: "Actuadores de pata dañados",
-          piezasNecesarias: ["Actuadores de pierna"],
-          nivelDificultad: "Alto",
-          herramientas: ["Multitool", "Soldador de plasma"],
-          notas: "Precisión mecánica crítica."
-        }
-      ],
       desguace: [
         { nombre: "Chasis AT-RT", tipo: "esencial" },
         { nombre: "Cañón Láser", tipo: "necesaria" },
@@ -318,15 +211,6 @@ export const vehicles = {
       ],
       tripulacion: "6 (piloto + copiloto + artilleros)",
       notas: 'Tanque de caminante pesado. Excelente fuego de cobertura.',
-      reparacion: [
-        {
-          titulo: "Torreta principal dañada",
-          piezasNecesarias: ["Torreta Maad-21"],
-          nivelDificultad: "Muy Alto",
-          herramientas: ["Grúa", "Soldador de plasma", "Multitool"],
-          notas: "Se requieren al menos 2 técnicos."
-        }
-      ],
       desguace: [
         { nombre: "Chasis AT-TE", tipo: "esencial" },
         { nombre: "Torreta de Láseres Pesados Maad-21", tipo: "necesaria" },
@@ -337,37 +221,6 @@ export const vehicles = {
         { nombre: "Sistemas hidráulicos", tipo: "comun" }
       ]
     },
-    {
-      id: 'terr-01',
-      nombre: 'Tanque Recon X1',
-      tipoRol: 'Reconocimiento',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=Tanque',
-      fabricante: 'Industrias Pesadas',
-      dimensiones: '5m x 3m',
-      caracteristicas: [
-        { titulo: "Motores", content: "Diesel-eléctrico" },
-        { titulo: "Armamento", content: "Cañón automático 30mm" },
-        { titulo: "Sistemas", content: "Radar de corto alcance" }
-      ],
-      tripulacion: 2,
-      notas: 'Excelente para terrenos difíciles.',
-      reparacion: [
-        {
-          titulo: "Mantenimiento de Motores",
-          piezasNecesarias: ["Motor"],
-          nivelDificultad: "Alto",
-          herramientas: ["Soldador", "Analizador"],
-          notas: "Precisión crítica en la alineación de inyectores."
-        }
-      ],
-      desguace: [
-        { nombre: "Chasis Recon X1", tipo: "esencial" },
-        { nombre: "Motor diesel-eléctrico", tipo: "necesaria" },
-        { nombre: "Cañón automático 30mm", tipo: "necesaria" },
-        { nombre: "Radar de corto alcance", tipo: "necesaria" },
-        { nombre: "Electrónica", tipo: "comun" }
-      ]
-    }
   ],
   navesCapitales: [
     {
@@ -382,22 +235,6 @@ export const vehicles = {
       ],
       tripulacion: "7400",
       notas: 'La columna vertebral de la Flota de la República.',
-      reparacion: [
-        {
-          titulo: "Mantenimiento de Motores Subluz",
-          piezasNecesarias: ["Motor Subluz"],
-          nivelDificultad: "Alto",
-          herramientas: ["Soldador", "Analizador"],
-          notas: "Precisión crítica en la alineación de inyectores."
-        },
-        {
-          titulo: "Desguace de Escudos",
-          piezasNecesarias: ["Generador de Escudos"],
-          nivelDificultad: "Medio",
-          herramientas: ["Destornillador sónico"],
-          notas: "Sistema de escudos propenso a fallar, extraer con cuidado."
-        }
-      ],
       desguace: [
         { nombre: "Chasis Venator", tipo: "esencial" },
         { nombre: "Motores de iones", tipo: "necesaria" },

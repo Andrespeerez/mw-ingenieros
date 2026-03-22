@@ -200,79 +200,99 @@ function TareasMecanica() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Mantenimiento</h3>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Proceso de Reparacion</h3>
         <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
-          <p className="text-green-400 text-sm mb-2">
-            Inspecciones rutinarias, lubricacion, ajustes, limpieza y calibraciones basicas 
-            para asegurar el funcionamiento correcto y prevenir fallos.
+          <p className="text-green-400 text-sm mb-3">
+            El proceso de reparacion sigue estos pasos:
           </p>
-          <Tooltip content={
-            <div>
-              <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
-              <p>Tiradas de Recopilar Informacion para inspecciones rutinarias.</p>
+          <div className="space-y-3">
+            <div className="border border-green-800 p-3 rounded">
+              <h4 className="text-green-400 font-bold text-xs mb-1">PASO 1: ESTADO [COMPROBACION]</h4>
+              <p className="text-green-600 text-xs mb-2">Evaluar el estado general del sistema.</p>
+              <Tooltip content={
+                <div className="space-y-2">
+                  <p className="text-yellow-500 font-bold">[OOC]</p>
+                  <p className="text-green-400 text-xs">Tirada de Estado: solo el dado.</p>
+                  <p className="text-green-400 text-xs mt-1">Mas alto = mejor estado.</p>
+                  <p className="text-green-400 text-xs mt-1">{'/me'} revisa el estado de la nave</p>
+                  <p className="text-green-400 text-xs">{'/dados'} {'->'} [valor]</p>
+                  <p className="text-green-400 text-xs">{'/do'} [resultado]</p>
+                </div>
+              }>
+                <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
+                  Ver mecanismo
+                </span>
+              </Tooltip>
             </div>
-          }>
-            <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-              Informacion OOC
-            </span>
-          </Tooltip>
+
+            <div className="border border-yellow-700 p-3 rounded">
+              <h4 className="text-yellow-400 font-bold text-xs mb-1">PASO 2: COMPROBACIONES [COMPROBACION]</h4>
+              <p className="text-yellow-600 text-xs mb-2">Diagnosticar problemas especificos. Tantas como necesites.</p>
+              <Tooltip content={
+                <div className="space-y-2">
+                  <p className="text-yellow-500 font-bold">[OOC]</p>
+                  <p className="text-green-400 text-xs">Usa Gravedad para evaluar dano: bajo = poco dano.</p>
+                  <p className="text-green-400 text-xs mt-1">Usa Estado para evaluar componentes: alto = bueno.</p>
+                  <p className="text-green-400 text-xs mt-1">{'/me'} intenta arrancar el motor</p>
+                  <p className="text-green-400 text-xs">{'/dados'} {'->'} [valor]</p>
+                  <p className="text-green-400 text-xs">{'/do'} [diagnostico]</p>
+                </div>
+              }>
+                <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
+                  Ver mecanismo
+                </span>
+              </Tooltip>
+            </div>
+
+            <div className="border border-red-700 p-3 rounded">
+              <h4 className="text-red-400 font-bold text-xs mb-1">PASO 3: REPARACION [ACCION]</h4>
+              <p className="text-red-600 text-xs mb-2">Reparar el problema encontrado.</p>
+              <Tooltip content={
+                <div className="space-y-2">
+                  <p className="text-yellow-500 font-bold">[OOC]</p>
+                  <p className="text-green-400 text-xs">Tirada de Accion: Dado + Competencia.</p>
+                  <p className="text-green-400 text-xs mt-1">Superar la dificultad del sistema.</p>
+                  <p className="text-green-400 text-xs mt-1">{'/me'} limpia los conductos (+0) [ACCION]</p>
+                  <p className="text-green-400 text-xs">{'/dados'} {'->'} [valor] + [competencia]</p>
+                  <p className="text-green-400 text-xs">{'/do'} [resultado]</p>
+                </div>
+              }>
+                <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
+                  Ver mecanismo
+                </span>
+              </Tooltip>
+            </div>
+          </div>
         </div>
       </div>
 
       <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Diagnostico de Sistemas y Danos</h3>
-        <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
-          <p className="text-green-400 text-sm mb-2">
-            Identificar la causa de un mal funcionamiento, evaluar la severidad de los danos 
-            y determinar que componentes estan afectados.
-          </p>
-          <p className="text-green-600 text-xs">
-            Este es el primer paso antes de intentar una reparacion.
-          </p>
-          <Tooltip content={
-            <div>
-              <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
-              <p>Tiradas de Recopilar Informacion para diagnostico.</p>
-            </div>
-          }>
-            <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed ml-2">
-              Informacion OOC
-            </span>
-          </Tooltip>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Reparacion de Sistemas y Danos</h3>
-        <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
-          <p className="text-green-400 text-sm mb-2">
-            Restaurar un sistema, componente o estructura dañada a un estado funcional.
-          </p>
-          <p className="text-green-600 text-xs mb-2">
-            Puede implicar: reemplazar piezas, soldar brechas, reconectar cableado, 
-            reparar circuitos o recalibrar componentes.
-          </p>
-          <Tooltip content={
-            <div>
-              <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
-              <p>Tiradas de Accion vs. Dificultad para reparaciones.</p>
-            </div>
-          }>
-            <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-              Informacion OOC
-            </span>
-          </Tooltip>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Tipos de Tiradas</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="bg-green-900/30 p-3 border border-green-700 rounded">
+            <h4 className="text-green-400 font-bold text-xs mb-1">ESTADO</h4>
+            <p className="text-green-500 text-xs">Mas alto = mejor</p>
+            <p className="text-green-600 text-xs mt-1">Evaluar si algo funciona</p>
+          </div>
+          <div className="bg-red-900/30 p-3 border border-red-700 rounded">
+            <h4 className="text-red-400 font-bold text-xs mb-1">GRAVEDAD</h4>
+            <p className="text-red-500 text-xs">Mas bajo = mejor</p>
+            <p className="text-red-600 text-xs mt-1">Evaluar dano</p>
+          </div>
+          <div className="bg-yellow-900/30 p-3 border border-yellow-700 rounded">
+            <h4 className="text-yellow-400 font-bold text-xs mb-1">MEDICION</h4>
+            <p className="text-yellow-500 text-xs">Cerca de 50 = mejor</p>
+            <p className="text-yellow-600 text-xs mt-1">Calibrar sistemas</p>
+          </div>
         </div>
       </div>
 
       <div className="bg-terminal-bg/30 p-4 border border-green-900/50">
-        <h3 className="text-green-400 font-bold mb-2">{'>>>'} Resumen de Tareas</h3>
-        <ul className="list-none space-y-1">
-          <li className="text-green-500 text-sm">1. <span className="text-yellow-400">Diagnosticar</span> - Identificar el problema</li>
-          <li className="text-green-500 text-sm">2. <span className="text-yellow-400">Evaluar</span> - Determinar recursos necesarios</li>
-          <li className="text-green-500 text-sm">3. <span className="text-yellow-400">Reparar</span> - Ejecutar la reparacion</li>
-          <li className="text-green-500 text-sm">4. <span className="text-yellow-400">Documentar</span> - Registrar cambios realizados</li>
-        </ul>
+        <h3 className="text-green-400 font-bold mb-2">{'>>>'} Recordatorio</h3>
+        <p className="text-green-500 text-xs">
+          Las <span className="text-green-400">COMPROBACIONES</span> usan solo el dado.
+          Las <span className="text-red-400">ACCIONES</span> usan Dado + Competencia.
+        </p>
       </div>
     </div>
   );

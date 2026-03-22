@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Page from '../../components/Page';
 import VehicleCard from '../../components/VehicleCard';
 import VehicleModal from '../../components/VehicleModal';
+import TerminalTabGroup from '../../components/TerminalTabGroup';
 import { vehicles } from '../../data/vehicles';
 
 export default function FichasTecnicasVehiculo() {
@@ -9,38 +10,36 @@ export default function FichasTecnicasVehiculo() {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   const tabs = [
-    { id: 'terrestres', label: 'Terrestres' },
-    { id: 'naves', label: 'Naves' },
-    { id: 'navesCapitales', label: 'Naves Capitales' }
+    { id: 'terrestres', label: 'TERRESTRES' },
+    { id: 'naves', label: 'NAVES' },
+    { id: 'navesCapitales', label: 'NAVES CAPITALES' }
   ];
 
   return (
     <Page title="FICHAS TECNICAS VEHICULO">
       <div className="p-5 bg-panel border border-border mb-6">
-        <div className="flex gap-2 mb-6">
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              className={`px-4 py-2 border ${
-                activeTab === tab.id
-                  ? 'bg-green-500 text-black'
-                  : 'bg-panel text-green-500 border-border hover:border-green-500'
-              }`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <TerminalTabGroup 
+          tabs={tabs} 
+          activeTab={activeTab} 
+          onTabChange={setActiveTab} 
+          className="mb-6"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {vehicles[activeTab].map(vehicle => (
-            <VehicleCard
-              key={vehicle.id}
-              vehicle={vehicle}
-              onClick={setSelectedVehicle}
-            />
-          ))}
+          {vehicles[activeTab] && vehicles[activeTab].length > 0 ? (
+            vehicles[activeTab].map(vehicle => (
+              <VehicleCard
+                key={vehicle.id}
+                vehicle={vehicle}
+                onClick={setSelectedVehicle}
+              />
+            ))
+          ) : (
+            <div className="col-span-full py-20 border border-dashed border-green-900 flex flex-col items-center justify-center opacity-50">
+              <span className="text-green-500 text-lg mb-2">[!] SIN REGISTROS</span>
+              <span className="text-green-700 text-xs tracking-tighter uppercase italic">La base de datos no contiene información sobre esta categoría</span>
+            </div>
+          )}
         </div>
       </div>
 
