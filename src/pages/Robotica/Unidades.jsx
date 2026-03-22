@@ -1,52 +1,53 @@
 import React, { useState } from 'react';
 import Page from '../../components/Page';
-import VehicleCard from '../../components/VehicleCard';
-import VehicleModal from '../../components/VehicleModal';
+import DroidCard from '../../components/DroidCard';
+import DroidModal from '../../components/DroidModal';
+import TerminalTabGroup from '../../components/TerminalTabGroup';
 import { droids } from '../../data/droids';
 
 export default function Unidades() {
   const [activeTab, setActiveTab] = useState('robotsCiviles');
-  const [selectedVehicle, setSelectedVehicle] = useState(null);
+  const [selectedDroid, setSelectedDroid] = useState(null);
 
   const tabs = [
-    { id: 'robotsCiviles', label: 'Robots Civiles' },
-    { id: 'robotsSeparatistas', label: 'Robots Separatistas' }
+    { id: 'robotsCiviles', label: 'ROBOTS CIVILES' },
+    { id: 'robotsSeparatistas', label: 'ROBOTS SEPARATISTAS' }
   ];
 
   return (
     <Page title="UNIDADES ROBOTICAS">
       <div className="p-5 bg-panel border border-border mb-6">
-        <div className="flex gap-2 mb-6">
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              className={`px-4 py-2 border ${
-                activeTab === tab.id
-                  ? 'bg-green-500 text-black'
-                  : 'bg-panel text-green-500 border-border hover:border-green-500'
-              }`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <TerminalTabGroup 
+          tabs={tabs} 
+          activeTab={activeTab} 
+          onTabChange={setActiveTab} 
+          className="mb-6"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {(droids[activeTab] || []).map(vehicle => (
-            <VehicleCard
-              key={vehicle.id}
-              vehicle={vehicle}
-              onClick={setSelectedVehicle}
-            />
-          ))}
+          {(droids[activeTab] || []).length > 0 ? (
+            (droids[activeTab] || []).map(droid => (
+              <DroidCard
+                key={droid.id}
+                droid={droid}
+                onClick={setSelectedDroid}
+              />
+            ))
+          ) : (
+            <div className="col-span-full py-20 border border-dashed border-green-900 flex flex-col items-center justify-center opacity-50">
+              <span className="text-green-500 text-lg mb-2">[!] SIN REGISTROS</span>
+            </div>
+          )}
         </div>
       </div>
 
-      <VehicleModal
-        vehicle={selectedVehicle}
-        onClose={() => setSelectedVehicle(null)}
+      <DroidModal
+        droid={selectedDroid}
+        categoria={activeTab}
+        onClose={() => setSelectedDroid(null)}
       />
     </Page>
   );
 }
+
+
