@@ -210,9 +210,10 @@ function TareasMecanica() {
               <h4 className="text-green-400 font-bold text-xs mb-1">FASE 1: DIAGNÓSTICO INTEGRAL</h4>
               <p className="text-green-600 text-xs mb-2">Evaluación del estado operativo general del sistema.</p>
               <Tooltip content={
-                <div className="space-y-2">
+                <div className="space-y-2 w-64">
                   <p className="text-yellow-500 font-bold">[OOC: Tirada de Estado]</p>
-                  <p className="text-green-400 text-xs">Más alto = mejor estado.</p>
+                  <p className="text-green-400 text-xs">Se utiliza para verificar la integridad de un sistema. Lanza 1d100. Cuanto más alto sea el resultado, mejor será el estado detectado.</p>
+                  <p className="text-green-400 text-xs">Ejemplo: Un resultado de 85 indica un estado excelente; un 15 indica un fallo inminente.</p>
                 </div>
               }>
                 <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
@@ -225,9 +226,10 @@ function TareasMecanica() {
               <h4 className="text-yellow-400 font-bold text-xs mb-1">FASE 2: ANÁLISIS DE FALLAS</h4>
               <p className="text-yellow-600 text-xs mb-2">Identificación de componentes comprometidos o averiados.</p>
               <Tooltip content={
-                <div className="space-y-2">
-                  <p className="text-yellow-500 font-bold">[OOC: Tiradas de Gravedad/Estado]</p>
-                  <p className="text-green-400 text-xs">Gravedad (bajo=bien), Estado (alto=bien).</p>
+                <div className="space-y-2 w-64">
+                  <p className="text-yellow-500 font-bold">[OOC: Tirada de Gravedad / Estado]</p>
+                  <p className="text-green-400 text-xs">Para evaluar fallos específicos, usa Gravedad (1d100, más bajo = mejor/menor daño) o Estado (1d100, más alto = mejor/menor desgaste).</p>
+                  <p className="text-green-400 text-xs">Ejemplo Gravedad: Lanza 1d100 para evaluar una brecha en el casco. Un 10 es un rasguño; un 90 es una brecha crítica.</p>
                 </div>
               }>
                 <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
@@ -240,9 +242,10 @@ function TareasMecanica() {
               <h4 className="text-red-400 font-bold text-xs mb-1">FASE 3: INTERVENCIÓN Y REPARACIÓN</h4>
               <p className="text-red-600 text-xs mb-2">Ejecución de maniobras correctivas sobre los componentes identificados.</p>
               <Tooltip content={
-                <div className="space-y-2">
+                <div className="space-y-2 w-64">
                   <p className="text-yellow-500 font-bold">[OOC: Tirada de Acción]</p>
-                  <p className="text-green-400 text-xs">Dado + Competencia >= Dificultad.</p>
+                  <p className="text-green-400 text-xs">Para reparar o modificar, lanza 1d100 y suma tu modificador de competencia (Nivel I: -10, Nivel II: 0, Nivel III: +10). Debes superar la dificultad del sistema.</p>
+                  <p className="text-green-400 text-xs">Ejemplo: Reparar un reactor (Dificultad 60) con Nivel II (Mod: 0). Debes sacar un 60 o más en el dado.</p>
                 </div>
               }>
                 <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
@@ -253,6 +256,41 @@ function TareasMecanica() {
           </div>
         </div>
       </div>
+
+      <div>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Tipos de Tiradas</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <Tooltip content={<p className="text-green-400 text-xs w-64">Verificar integridad. Lanzar 1d100. Resultado alto = sistema en buen estado.</p>}>
+             <div className="bg-green-900/30 p-3 border border-green-700 rounded cursor-help">
+               <h4 className="text-green-400 font-bold text-xs mb-1">ESTADO</h4>
+               <p className="text-green-500 text-xs">Evaluar si algo funciona</p>
+             </div>
+          </Tooltip>
+          <Tooltip content={<p className="text-red-400 text-xs w-64">Evaluar daño. Lanzar 1d100. Resultado bajo = daño mínimo.</p>}>
+             <div className="bg-red-900/30 p-3 border border-red-700 rounded cursor-help">
+               <h4 className="text-red-400 font-bold text-xs mb-1">GRAVEDAD</h4>
+               <p className="text-red-500 text-xs">Evaluar daño</p>
+             </div>
+          </Tooltip>
+          <Tooltip content={<p className="text-yellow-400 text-xs w-64">Calibración. Lanzar 1d100. Resultado cercano a 50 = calibración ideal.</p>}>
+             <div className="bg-yellow-900/30 p-3 border border-yellow-700 rounded cursor-help">
+               <h4 className="text-yellow-400 font-bold text-xs mb-1">MEDICION</h4>
+               <p className="text-yellow-500 text-xs">Calibrar sistemas</p>
+             </div>
+          </Tooltip>
+        </div>
+      </div>
+
+      <div className="bg-terminal-bg/30 p-4 border border-green-900/50">
+        <h3 className="text-green-400 font-bold mb-2">{'>>>'} Recordatorio Operativo</h3>
+        <p className="text-green-500 text-xs">
+          Las COMPROBACIONES (Diagnóstico) usan únicamente el valor del dado.
+          Las ACCIONES (Reparación) requieren la aplicación del modificador de competencia al resultado del dado.
+        </p>
+      </div>
+    </div>
+  );
+}
 
       <div>
         <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Tipos de Tiradas</h3>
@@ -314,7 +352,12 @@ function Construccion() {
             <p className="text-green-600 text-xs mb-2">
               Verificación de la viabilidad de un chasis base.
             </p>
-            <Tooltip content={<p className="text-green-400 text-xs">[OOC: Tirada Estado, Dif 50]</p>}>
+            <Tooltip content={
+                <div className="space-y-2 w-64">
+                    <p className="text-yellow-500 font-bold">[OOC: Tirada de Estado]</p>
+                    <p className="text-green-400 text-xs">Para evaluar si un chasis es recuperable, realiza una Tirada de Estado contra una dificultad de 50. Si se supera, el chasis entero está disponible para su uso.</p>
+                </div>
+            }>
               <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">Ver criterios de evaluación</span>
             </Tooltip>
           </div>
@@ -324,7 +367,12 @@ function Construccion() {
             <p className="text-green-600 text-xs mb-2">
               Validación de funcionamiento de piezas críticas.
             </p>
-            <Tooltip content={<p className="text-green-400 text-xs">[OOC: Tirada Estado, Resultado > 50]</p>}>
+            <Tooltip content={
+                <div className="space-y-2 w-64">
+                    <p className="text-yellow-500 font-bold">[OOC: Tirada de Estado]</p>
+                    <p className="text-green-400 text-xs">Realiza una Tirada de Estado por cada componente. Un resultado superior a 50 garantiza que la pieza está en condiciones óptimas para su reutilización.</p>
+                </div>
+            }>
               <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">Ver criterios de inspección</span>
             </Tooltip>
           </div>
@@ -334,7 +382,12 @@ function Construccion() {
             <p className="text-green-600 text-xs mb-2">
               Retirada del componente del vehículo donante.
             </p>
-            <Tooltip content={<p className="text-green-400 text-xs">[OOC: Tirada Acción, Dif 50]</p>}>
+            <Tooltip content={
+                <div className="space-y-2 w-64">
+                    <p className="text-yellow-500 font-bold">[OOC: Tirada de Acción]</p>
+                    <p className="text-green-400 text-xs">Realiza una Tirada de Acción (1d100 + Competencia) contra una dificultad de 50. Si fallas varias veces, el componente se dañará irremediablemente durante la extracción.</p>
+                </div>
+            }>
               <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">Ver parámetros de riesgo</span>
             </Tooltip>
           </div>
@@ -347,7 +400,12 @@ function Construccion() {
           <p className="text-green-600 text-xs mb-2">
             Instalación de componentes certificados.
           </p>
-          <Tooltip content={<p className="text-green-400 text-xs">[OOC: Tirada Acción por componente, Dif 50]</p>}>
+          <Tooltip content={
+              <div className="space-y-2 w-64">
+                  <p className="text-yellow-500 font-bold">[OOC: Tirada de Acción]</p>
+                  <p className="text-green-400 text-xs">Por cada componente principal instalado, realiza una Tirada de Acción (1d100 + Competencia) contra una dificultad de 50. Fallos consecutivos pueden resultar en la rotura de la pieza.</p>
+              </div>
+          }>
             <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">Ver protocolos de instalación</span>
           </Tooltip>
         </div>
