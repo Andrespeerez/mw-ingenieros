@@ -352,3 +352,35 @@ function Construccion() {
           </Tooltip>
         </div>
       </div>
+      <div>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Componentes Principales</h3>
+        <p className="text-green-600 text-xs mb-3">
+          Para construir un vehículo o sistema complejo a partir de chatarra.
+          Las Piezas Comunes tienen abundancia y no hay que preocuparse por su disponibilidad.
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <div className="bg-terminal-bg/50 p-2 border border-green-700 text-center">
+            <h4 className="text-green-400 font-bold text-sm">Chasis</h4>
+            <p className="text-yellow-500 text-xs">[Esencial]</p>
+          </div>
+          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
+            <h4 className="text-green-500 text-sm">Circuitera</h4>
+            <p className="text-green-600 text-xs">[Recambios Comunes]</p>
+          </div>
+          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
+            <h4 className="text-green-500 text-sm">Sistema de Propulsion</h4>
+          </div>
+          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
+            <h4 className="text-green-500 text-sm">Sistema de Armamento</h4>
+          </div>
+          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
+            <h4 className="text-green-500 text-sm">Sistema de Navegacion</h4>
+          </div>
+          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
+            <h4 className="text-green-500 text-sm">Sistema de Soporte Vital</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
