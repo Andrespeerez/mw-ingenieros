@@ -4,7 +4,7 @@ export const droids = {
       id: 'r2-series',
       nombre: 'Unidad Astromecánica R2',
       tipoRol: 'Reparación / Navegación',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=R2',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774212967/r2_npgvpg.png',
       fabricante: 'Autómatas Industriales',
       dimensiones: '1.09m',
       caracteristicas: [
@@ -24,7 +24,7 @@ export const droids = {
       id: 'gnk-power',
       nombre: 'Droide de Energía GNK',
       tipoRol: 'Generador Móvil',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=GONK',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774212964/gonk_mou9zy.png',
       fabricante: 'Autómatas Industriales',
       dimensiones: '1.1m',
       caracteristicas: [
@@ -43,7 +43,7 @@ export const droids = {
       id: '2-1b-med',
       nombre: 'Droide Médico 2-1B',
       tipoRol: 'Asistencia Médica',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=2-1B',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774212964/2-1b_ai3wvv.png',
       fabricante: 'Geentech / Industrias Automaton',
       dimensiones: '1.6m',
       caracteristicas: [
@@ -64,7 +64,7 @@ export const droids = {
       id: 'sep-01',
       nombre: 'Droide de Combate B1',
       tipoRol: 'Infantería',
-      img: 'https://placehold.co/200x150/000000/FF0000?text=B1',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774212963/b1_ar4oul.png',
       fabricante: 'Autómatas Baktoid',
       dimensiones: '1.93m',
       caracteristicas: [
@@ -78,7 +78,7 @@ export const droids = {
       id: 'sep-02',
       nombre: 'Superdroide de Combate B2',
       tipoRol: 'Infantería Pesada',
-      img: 'https://placehold.co/200x150/000000/FF0000?text=B2',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774212964/b2_exyj20.png',
       fabricante: 'Autómatas Baktoid',
       dimensiones: '1.86m',
       caracteristicas: [
@@ -91,7 +91,7 @@ export const droids = {
       id: 'sep-04',
       nombre: 'Droideka',
       tipoRol: 'Destructor / Escolta',
-      img: 'https://placehold.co/200x150/000000/FF0000?text=DROIDEKA',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774212965/droideka_szb3sq.png',
       fabricante: 'Kolpobátrax',
       dimensiones: '1.83m',
       caracteristicas: [
@@ -104,7 +104,7 @@ export const droids = {
         id: 'sep-05',
         nombre: 'MagnaGuardia IG-100',
         tipoRol: 'Guardaespaldas de Élite',
-        img: 'https://placehold.co/200x150/000000/FF0000?text=MAGNA',
+        img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774212965/magnaguardia_u1ehxa.png',
         fabricante: 'Autómatas Baktoid',
         dimensiones: '1.95m',
         caracteristicas: [

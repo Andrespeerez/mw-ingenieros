@@ -135,7 +135,7 @@ export const vehicles = {
       id: 'barc-speeder',
       nombre: 'Barc Speeder',
       tipoRol: 'Vehículo de Reconocimiento',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=BARC',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774211936/barc_fye8g8.png',
       fabricante: 'Ingeniería Rotativa',
       dimensiones: '3.2m',
       caracteristicas: [
@@ -155,7 +155,7 @@ export const vehicles = {
       id: 'tx-130',
       nombre: 'TX-130',
       tipoRol: 'Tanque de Combate',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=TX-130',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774211936/tx-130_eiypqu.png',
       fabricante: 'Haor Chall Engineering',
       dimensiones: '6.5m',
       caracteristicas: [
@@ -178,7 +178,7 @@ export const vehicles = {
       id: 'at-rt',
       nombre: 'AT-RT',
       tipoRol: 'Caminante de Reconocimiento',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=AT-RT',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774211935/at-rt_ukcist.png',
       fabricante: 'Industrias Rothana',
       dimensiones: '3.2m',
       caracteristicas: [
@@ -201,7 +201,7 @@ export const vehicles = {
       id: 'at-te',
       nombre: 'AT-TE',
       tipoRol: 'Caminante de Asalto',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=AT-TE',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774211936/at-te_qabsqk.png',
       fabricante: 'Industrias Rothana',
       dimensiones: '13.2m',
       caracteristicas: [
@@ -227,7 +227,7 @@ export const vehicles = {
       id: 'cap-01',
       nombre: 'Crucero Estelar clase Venator',
       tipoRol: 'Nave Capital de Combate',
-      img: 'https://placehold.co/200x150/000000/00FF00?text=Venator',
+      img: 'https://res.cloudinary.com/dhaeqd0f2/image/upload/v1774211936/venator_isjlok.png',
       fabricante: 'Astilleros de Kuat',
       dimensiones: '1137m',
       caracteristicas: [
