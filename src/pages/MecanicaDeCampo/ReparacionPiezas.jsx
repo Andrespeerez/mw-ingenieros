@@ -227,7 +227,7 @@ function TareasMecanica() {
               <p className="text-yellow-600 text-xs mb-2">Identificación de componentes comprometidos o averiados.</p>
               <Tooltip content={
                 <div className="space-y-2 w-64">
-                  <p className="text-yellow-500 font-bold">[OOC: Tirada de Gravedad / Estado]</p>
+                  <p className="text-yellow-500 font-bold">[OOC: Tiradas de Gravedad / Estado]</p>
                   <p className="text-green-400 text-xs">Para evaluar fallos específicos, usa Gravedad (1d100, más bajo = mejor/menor daño) o Estado (1d100, más alto = mejor/menor desgaste).</p>
                   <p className="text-green-400 text-xs">Ejemplo Gravedad: Lanza 1d100 para evaluar una brecha en el casco. Un 10 es un rasguño; un 90 es una brecha crítica.</p>
                 </div>
@@ -286,38 +286,6 @@ function TareasMecanica() {
         <p className="text-green-500 text-xs">
           Las COMPROBACIONES (Diagnóstico) usan únicamente el valor del dado.
           Las ACCIONES (Reparación) requieren la aplicación del modificador de competencia al resultado del dado.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-      <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Tipos de Tiradas</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div className="bg-green-900/30 p-3 border border-green-700 rounded">
-            <h4 className="text-green-400 font-bold text-xs mb-1">ESTADO</h4>
-            <p className="text-green-500 text-xs">Mas alto = mejor</p>
-            <p className="text-green-600 text-xs mt-1">Evaluar si algo funciona</p>
-          </div>
-          <div className="bg-red-900/30 p-3 border border-red-700 rounded">
-            <h4 className="text-red-400 font-bold text-xs mb-1">GRAVEDAD</h4>
-            <p className="text-red-500 text-xs">Mas bajo = mejor</p>
-            <p className="text-red-600 text-xs mt-1">Evaluar dano</p>
-          </div>
-          <div className="bg-yellow-900/30 p-3 border border-yellow-700 rounded">
-            <h4 className="text-yellow-400 font-bold text-xs mb-1">MEDICION</h4>
-            <p className="text-yellow-500 text-xs">Cerca de 50 = mejor</p>
-            <p className="text-yellow-600 text-xs mt-1">Calibrar sistemas</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-terminal-bg/30 p-4 border border-green-900/50">
-        <h3 className="text-green-400 font-bold mb-2">{'>>>'} Recordatorio</h3>
-        <p className="text-green-500 text-xs">
-          Las <span className="text-green-400">COMPROBACIONES</span> usan solo el dado.
-          Las <span className="text-red-400">ACCIONES</span> usan Dado + Competencia.
         </p>
       </div>
     </div>
