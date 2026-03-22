@@ -200,65 +200,53 @@ function TareasMecanica() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Proceso de Reparacion</h3>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Procedimiento Estándar de Reparación</h3>
         <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
           <p className="text-green-400 text-sm mb-3">
-            El proceso de reparacion sigue estos pasos:
+            El personal técnico seguirá estrictamente este protocolo para asegurar la integridad de los sistemas:
           </p>
           <div className="space-y-3">
             <div className="border border-green-800 p-3 rounded">
-              <h4 className="text-green-400 font-bold text-xs mb-1">PASO 1: ESTADO [COMPROBACION]</h4>
-              <p className="text-green-600 text-xs mb-2">Evaluar el estado general del sistema.</p>
+              <h4 className="text-green-400 font-bold text-xs mb-1">FASE 1: DIAGNÓSTICO INTEGRAL</h4>
+              <p className="text-green-600 text-xs mb-2">Evaluación del estado operativo general del sistema.</p>
               <Tooltip content={
                 <div className="space-y-2">
-                  <p className="text-yellow-500 font-bold">[OOC]</p>
-                  <p className="text-green-400 text-xs">Tirada de Estado: solo el dado.</p>
-                  <p className="text-green-400 text-xs mt-1">Mas alto = mejor estado.</p>
-                  <p className="text-green-400 text-xs mt-1">{'/me'} revisa el estado de la nave</p>
-                  <p className="text-green-400 text-xs">{'/dados'} {'->'} [valor]</p>
-                  <p className="text-green-400 text-xs">{'/do'} [resultado]</p>
+                  <p className="text-yellow-500 font-bold">[OOC: Tirada de Estado]</p>
+                  <p className="text-green-400 text-xs">Más alto = mejor estado.</p>
                 </div>
               }>
                 <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                  Ver mecanismo
+                  Ver especificaciones técnicas
                 </span>
               </Tooltip>
             </div>
 
             <div className="border border-yellow-700 p-3 rounded">
-              <h4 className="text-yellow-400 font-bold text-xs mb-1">PASO 2: COMPROBACIONES [COMPROBACION]</h4>
-              <p className="text-yellow-600 text-xs mb-2">Diagnosticar problemas especificos. Tantas como necesites.</p>
+              <h4 className="text-yellow-400 font-bold text-xs mb-1">FASE 2: ANÁLISIS DE FALLAS</h4>
+              <p className="text-yellow-600 text-xs mb-2">Identificación de componentes comprometidos o averiados.</p>
               <Tooltip content={
                 <div className="space-y-2">
-                  <p className="text-yellow-500 font-bold">[OOC]</p>
-                  <p className="text-green-400 text-xs">Usa Gravedad para evaluar dano: bajo = poco dano.</p>
-                  <p className="text-green-400 text-xs mt-1">Usa Estado para evaluar componentes: alto = bueno.</p>
-                  <p className="text-green-400 text-xs mt-1">{'/me'} intenta arrancar el motor</p>
-                  <p className="text-green-400 text-xs">{'/dados'} {'->'} [valor]</p>
-                  <p className="text-green-400 text-xs">{'/do'} [diagnostico]</p>
+                  <p className="text-yellow-500 font-bold">[OOC: Tiradas de Gravedad/Estado]</p>
+                  <p className="text-green-400 text-xs">Gravedad (bajo=bien), Estado (alto=bien).</p>
                 </div>
               }>
                 <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                  Ver mecanismo
+                  Ver especificaciones técnicas
                 </span>
               </Tooltip>
             </div>
 
             <div className="border border-red-700 p-3 rounded">
-              <h4 className="text-red-400 font-bold text-xs mb-1">PASO 3: REPARACION [ACCION]</h4>
-              <p className="text-red-600 text-xs mb-2">Reparar el problema encontrado.</p>
+              <h4 className="text-red-400 font-bold text-xs mb-1">FASE 3: INTERVENCIÓN Y REPARACIÓN</h4>
+              <p className="text-red-600 text-xs mb-2">Ejecución de maniobras correctivas sobre los componentes identificados.</p>
               <Tooltip content={
                 <div className="space-y-2">
-                  <p className="text-yellow-500 font-bold">[OOC]</p>
-                  <p className="text-green-400 text-xs">Tirada de Accion: Dado + Competencia.</p>
-                  <p className="text-green-400 text-xs mt-1">Superar la dificultad del sistema.</p>
-                  <p className="text-green-400 text-xs mt-1">{'/me'} limpia los conductos (+0) [ACCION]</p>
-                  <p className="text-green-400 text-xs">{'/dados'} {'->'} [valor] + [competencia]</p>
-                  <p className="text-green-400 text-xs">{'/do'} [resultado]</p>
+                  <p className="text-yellow-500 font-bold">[OOC: Tirada de Acción]</p>
+                  <p className="text-green-400 text-xs">Dado + Competencia >= Dificultad.</p>
                 </div>
               }>
                 <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                  Ver mecanismo
+                  Ver especificaciones técnicas
                 </span>
               </Tooltip>
             </div>
@@ -303,153 +291,64 @@ function Construccion() {
     <div className="space-y-6">
       <div className="bg-terminal-bg/50 p-4 border-l-2 border-green-500">
         <p className="text-green-400 text-sm">
-          Funcion avanzada de la mecanica: construir sistemas y vehiculos desde cero 
-          utilizando piezas nuevas o recuperadas (chatarra).
+          Protocolo para la creación de sistemas complejos o restauración de vehículos desde cero utilizando recambios o componentes recuperados.
         </p>
       </div>
 
       <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Mecanica de Resolucion</h3>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Gestión de Suministros</h3>
         <p className="text-green-500 text-sm mb-2">
-          Los componentes se obtienen de dos fuentes:
+          Los materiales se adquieren mediante adquisición oficial o recuperación de campo:
         </p>
-        <ul className="list-none ml-4 space-y-1">
-          <li className="text-green-600 text-sm">-&gt; Comprando recambios nuevos o de segunda mano</li>
-          <li className="text-green-600 text-sm">-&gt; Recuperando componentes de vehiculos inutilizados (chatarreo)</li>
+        <ul className="list-none ml-4 space-y-1 text-green-600 text-sm">
+          <li>- Adquisición de componentes nuevos en almacenes.</li>
+          <li>- Recuperación de componentes de vehículos inutilizados (Chatarreo).</li>
         </ul>
       </div>
 
       <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Chatarreo: Recuperacion de Componentes</h3>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Fase de Recuperación</h3>
         <div className="space-y-3">
           <div className="bg-terminal-bg/30 p-3 border border-green-900">
-            <h4 className="text-green-400 font-bold text-sm mb-1">1. Evaluar el Chasis</h4>
+            <h4 className="text-green-400 font-bold text-sm mb-1">Evaluación de Estructura Principal</h4>
             <p className="text-green-600 text-xs mb-2">
-              Determina si el chasis es recuperable.
+              Verificación de la viabilidad de un chasis base.
             </p>
-            <Tooltip content={
-              <div>
-                <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
-                <p>Tirada de Estado, dificultad 50.</p>
-                <p className="mt-2">Si se supera, el chasis entero se puede recuperar y servir de base.</p>
-              </div>
-            }>
-              <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                Ver tirada
-              </span>
+            <Tooltip content={<p className="text-green-400 text-xs">[OOC: Tirada Estado, Dif 50]</p>}>
+              <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">Ver criterios de evaluación</span>
             </Tooltip>
           </div>
 
           <div className="bg-terminal-bg/30 p-3 border border-green-900">
-            <h4 className="text-green-400 font-bold text-sm mb-1">2. Evaluar las Partes</h4>
+            <h4 className="text-green-400 font-bold text-sm mb-1">Inspección de Componentes</h4>
             <p className="text-green-600 text-xs mb-2">
-              Para cada componente principal deseado (excepto chasis).
+              Validación de funcionamiento de piezas críticas.
             </p>
-            <Tooltip content={
-              <div>
-                <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
-                <p>Tirada de Estado por cada componente.</p>
-                <p className="mt-2">El resultado debe ser superior a 50.</p>
-              </div>
-            }>
-              <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                Ver tirada
-              </span>
+            <Tooltip content={<p className="text-green-400 text-xs">[OOC: Tirada Estado, Resultado > 50]</p>}>
+              <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">Ver criterios de inspección</span>
             </Tooltip>
           </div>
 
           <div className="bg-terminal-bg/30 p-3 border border-green-900">
-            <h4 className="text-green-400 font-bold text-sm mb-1">3. Desmontar</h4>
+            <h4 className="text-green-400 font-bold text-sm mb-1">Maniobra de Extracción</h4>
             <p className="text-green-600 text-xs mb-2">
-              Extraer la pieza del vehiculo donante.
+              Retirada del componente del vehículo donante.
             </p>
-            <Tooltip content={
-              <div>
-                <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
-                <p>Tirada de Accion vs. Dificultad 50.</p>
-                <p className="mt-2">Si fallas varias veces, la pieza se rompera al extraerla.</p>
-              </div>
-            }>
-              <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-                Ver tirada
-              </span>
+            <Tooltip content={<p className="text-green-400 text-xs">[OOC: Tirada Acción, Dif 50]</p>}>
+              <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">Ver parámetros de riesgo</span>
             </Tooltip>
-          </div>
-
-          <div className="bg-terminal-bg/30 p-3 border border-yellow-600/50">
-            <p className="text-yellow-400 text-xs">
-              {'>>>'} Documenta las piezas que recuperes
-            </p>
           </div>
         </div>
       </div>
 
       <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Ensamblaje</h3>
-        <p className="text-green-500 text-sm mb-2">
-          Una vez tengas los componentes principales y un chasis adecuado.
-        </p>
+        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Fase de Ensamblaje</h3>
         <div className="bg-terminal-bg/30 p-3 border border-green-900 mb-3">
           <p className="text-green-600 text-xs mb-2">
-            Los componentes deben ser del mismo tipo de vehiculo que estas construyendo.
+            Instalación de componentes certificados.
           </p>
-          <Tooltip content={
-            <div>
-              <p className="text-yellow-500 font-bold mb-2">[OOC]</p>
-              <p>Por cada componente principal instalado:</p>
-              <p className="mt-2">Tirada de Accion vs. Dificultad 50.</p>
-            </div>
-          }>
-            <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">
-              Ver tiradas de instalacion
-            </span>
+          <Tooltip content={<p className="text-green-400 text-xs">[OOC: Tirada Acción por componente, Dif 50]</p>}>
+            <span className="text-mint-400 text-xs cursor-help border-b border-mint-400 border-dashed">Ver protocolos de instalación</span>
           </Tooltip>
         </div>
-
-        <div className="bg-terminal-bg/30 p-3 border border-red-900/50">
-          <p className="text-red-400 text-xs">
-            {'>>>'} Si fallas continuamente la Tirada de Accion, puedes romper la pieza.
-            Deberas obtener otra pieza similar para intentarlo de nuevo.
-          </p>
-        </div>
       </div>
-
-      <div>
-        <h3 className="text-yellow-500 font-bold mb-3">{'>>'} Componentes Principales</h3>
-        <p className="text-green-600 text-xs mb-3">
-          Para construir un vehiculo o sistema complejo a partir de chatarra. 
-          Las Piezas Comunes tienen abundancia y no hay que preocuparse por su disponibilidad.
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          <div className="bg-terminal-bg/50 p-2 border border-green-700 text-center">
-            <h4 className="text-green-400 font-bold text-sm">Chasis</h4>
-            <p className="text-yellow-500 text-xs">[Esencial]</p>
-          </div>
-          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
-            <h4 className="text-green-500 text-sm">Circuitera</h4>
-            <p className="text-green-600 text-xs">[Recambios Comunes]</p>
-          </div>
-          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
-            <h4 className="text-green-500 text-sm">Sistema de Propulsion</h4>
-          </div>
-          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
-            <h4 className="text-green-500 text-sm">Sistema de Armamento</h4>
-          </div>
-          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
-            <h4 className="text-green-500 text-sm">Sistema de Navegacion</h4>
-          </div>
-          <div className="bg-terminal-bg/30 p-2 border border-green-900 text-center">
-            <h4 className="text-green-500 text-sm">Sistema de Soporte Vital</h4>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-terminal-bg/30 p-4 border border-green-900/50">
-        <p className="text-green-500 text-sm">
-          {'>>>'} Un vehiculo que no funcione pero con chasis intacto, o uno destruido con 
-          chasis en buenas condiciones, puede ser remolcado hasta taller para su reconstruccion.
-        </p>
-      </div>
-    </div>
-  );
-}
