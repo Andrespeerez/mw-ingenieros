@@ -15,6 +15,7 @@ import Unidades from './pages/Robotica/Unidades'
 import GestionTecnicaDroide from './pages/Robotica/GestionTecnicaDroide'
 import RolPasivo from './pages/Ingenieria/RolPasivo'
 import ManualComponentes from './pages/MecanicaDeCampo/ManualComponentes'
+import ManualPilotos from './pages/General/ManualPilotos'
 
 const AppRouter = () => {
   return (
@@ -25,7 +26,8 @@ const AppRouter = () => {
           <Route element={<ProtectedRoute />}> 
             <Route path="/" element={<TerminalLayout />}> 
               <Route index element={<ReglamentoBase />} />
-              <Route path="reglamento-base" element={<ReglamentoBase />} />
+              <Route path="general/reglamento-base" element={<ReglamentoBase />} />
+              <Route path="general/manual-pilotos" element={<ManualPilotos />} />
               <Route path="mecanica-de-campo/reparacion-y-piezas" element={<ReparacionPiezas />} />
               <Route path="mecanica-de-campo/fichas-tecnicas-vehiculo" element={<FichasTecnicasVehiculo />} />
               <Route path="mecanica-de-campo/manual-componentes" element={<ManualComponentes />} />

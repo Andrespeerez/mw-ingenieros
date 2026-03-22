@@ -1,9 +1,10 @@
 // Configuración de menú estructurada (ASCII)
 const menu = [
   {
-    section: 'Reglamento base',
+    section: 'General',
     items: [
-      { path: '/reglamento-base', label: 'Reglamento base' },
+      { path: '/general/reglamento-base', label: 'Reglamento base' },
+      { path: '/general/manual-pilotos', label: 'Manual Pilotos' },
     ],
   },
   {
