@@ -1,33 +1,138 @@
 # AGENTS.md - Terminal Engineer App
 
-## Contexto del Proyecto
+## Project Overview
 
- Este proyecto es una web frontal en React + TailwindCSS que asemeja una terminal retro. La interfaz utiliza un menú izquierdo tipo panel para navegar entre elementos de contenido, que se cargan en el panel derecho. Las bases deben ser sólidas para permitir reutilizabilidad y expansión (modales u otros elementos UI). La web incluye un sistema de login simulado (contraseña republica) para dar la sensación de área VIP sin seguridad real. El objetivo es proporcionar una base modular y escalable para construir la UI de forma incremental.
+React + TailwindCSS retro terminal-style web app with left sidebar navigation and right content panel. Simulated login system (password: "republica") for VIP area feel.
 
-## Skills Catalog
+## Commands
 
-| slug | name | short_description | category | commands | skill_path | version | status | owner |
-|---|---|---|---|---|---|---|---|---|
-| skill-studio | Skill Studio | CLI para gestionar y enlazar skills atómicas | Tooling / Skills Ecosystem | init, new, scaffold, list, validate, docs, test, publish, templates | .agents/skills/skill-studio/SKILL.md | v0.1.0 | planned | equipo-ecosystem |
-| skill-clean-code | Skill Clean Code | Prácticas de Clean Code y guías | Calidad de código | init, validate, review-sample | .agents/skills/skill-clean-code/SKILL.md | v0.1.0 | planned | equipo-qa |
-| skill-react-testing | React Testing | Patrones de tests para React | Testing | init, generate-test-template, run-tests, validate | .agents/skills/skill-react-testing/SKILL.md | v0.1.0 | planned | frontend |
-| skill-tailwind-patterns | Tailwind Patterns | Patrones de diseño Tailwind | Estilo/UI | init, list-patterns, apply-pattern | .agents/skills/skill-tailwind-patterns/SKILL.md | v0.1.0 | planned | UI |
-| skill-accessibility | Accessibility | Pautas y checks de accesibilidad | Accesibilidad | init, audit, add-checklist | .agents/skills/skill-accessibility/SKILL.md | v0.1.0 | planned | accessibility-team |
-| skill-project-context | Project Context | Contexto del proyecto para ingenieros del Gran Ejército de la Republica | Contexto y directrices para el stack de ingenieros | init-context, describe, summarize, docs | .agents/skills/skill-project-context/SKILL.md | v0.1.0 | planned | equipo-ecosystem |
-| skill-frontend-terminal | Frontend Terminal Web | Interfaz front-end estilo terminal en React + Tailwind | Aplicación frontal con menú izquierdo y panel derecho, estilo terminal retro | init, start, scaffold-page, load-content | .agents/skills/skill-frontend-terminal/SKILL.md | v0.1.0 | planned | frontend |
+### Development
+```bash
+npm run dev      # Start Vite dev server (port 5173)
+npm start        # Alias for dev
+```
 
-Notas: Este índice enlaza a SKILL.md individuales para cada skill atómica. Para ampliar, añade nuevas filas siguiendo la misma convención.
-| skill-comms | Comms | Login y encriptación para comunicaciones | Communications / Security | init, setup-login, manage-keys, rotate-keys, docs, test, publish | .agents/skills/skill-comms/SKILL.md | v0.1.0 | planned | equipo-comms |
+### Build & Preview
+```bash
+npm run build           # Production build with Vite
+npm run preview         # Preview production build (port 5173)
+```
 
-## Sistema de Fichas Técnicas de Vehículos
+### Testing
+No test framework currently configured. To add tests:
+```bash
+npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom
+```
 
-Para gestionar de forma modular las fichas técnicas de naves y vehículos terrestres:
+To run a single test file with Vitest:
+```bash
+npx vitest run src/components/VehicleCard.test.jsx
+```
 
-- **Data (`src/data/vehicles.js`):** Fuente única de verdad. Estructura de objetos categorizados.
-- **Componentes:**
-  - `VehicleCard.jsx`: Visualización preliminar (Grid).
-  - `VehicleModal.jsx`: Visualización detallada mediante modal.
-- **Página (`src/pages/Vehiculos/Vehiculos.jsx`):** Lógica de renderizado dinámico basado en las categorías de `vehicles.js`.
+### Linting
+No ESLint/Prettier configured. Consider adding:
+```bash
+npm install -D eslint eslint-plugin-react prettier eslint-config-prettier
+```
 
-Para añadir un vehículo, solo editar el objeto en `src/data/vehicles.js`.
+## Code Style Guidelines
 
+### File Organization
+```
+src/
+├── components/     # Reusable UI components (PascalCase)
+├── pages/          # Route pages, organized by category folder
+├── data/           # Static data files (menuConfig.js, vehicles.js, etc.)
+├── utils/          # Utility functions (cipherUtils.js, cryptoUtils.js)
+├── auth/           # Authentication components and context
+├── styles/         # Additional CSS files
+└── main.jsx        # App entry point
+```
+
+### Component Structure
+- Use functional components with arrow function or function declaration syntax
+- Export default for page/component files
+- Named exports for utilities and data
+
+### Imports
+```jsx
+// React core
+import React, { useState, useEffect, useMemo } from 'react'
+
+// Router
+import { useNavigate, useLocation, Outlet } from 'react-router-dom'
+
+// Local imports - relative paths
+import Sidebar from './Sidebar'
+import menuConfig from '../data/menuConfig'
+import { useAuth } from '../auth/AuthContext'
+```
+
+### Naming Conventions
+- **Components**: PascalCase (TerminalLayout, VehicleCard, DroidModal)
+- **Files**: PascalCase for components, camelCase for utils/data
+- **Functions**: camelCase
+- **Constants**: camelCase or UPPER_SNAKE_CASE for magic values
+
+### JSX & Tailwind
+- Use self-closing tags for components without children
+- Tailwind classes: utility-first, responsive with md: prefix
+- Custom colors defined in colors.css (use semantic names like `text-green-500`)
+- Retro terminal theme: green-on-black, panel backgrounds, CRT effects
+
+### State Management
+- Use `useState` for local component state
+- Use `useContext` (AuthContext) for global auth state
+- Use `useMemo` for expensive calculations (like menu flattening)
+- Use `useEffect` for side effects (keyboard listeners, navigation)
+
+### Error Handling
+- Handle undefined props with default values where appropriate
+- Use optional chaining (`?.`) for nested object access
+- Return null or fallback UI for missing data
+
+### Keyboard Navigation
+- Support ArrowUp/ArrowDown for menu selection
+- Enter to navigate, Escape to close modals/sidebar on mobile
+
+## Project-Specific Patterns
+
+### Adding New Pages
+1. Create component in `src/pages/<Category>/<PageName>.jsx`
+2. Add route in `src/main.jsx` under ProtectedRoute
+3. Add menu item in `src/data/menuConfig.js`
+
+### Vehicle System
+- Data source: `src/data/vehicles.js`
+- Components: VehicleCard (grid), VehicleModal (detail)
+- Page: `src/pages/Vehiculos/Vehiculos.jsx`
+
+### Droid System
+- Data source: `src/data/droids.js`
+- Components: DroidCard, DroidModal
+- Page: `src/pages/Robotica/Unidades.jsx`
+
+### Auth Flow
+- Password: "republica" (hardcoded, simulated)
+- AuthContext provides login/logout/isAuthenticated
+- ProtectedRoute wraps authenticated routes
+
+## Skills (Available)
+
+| Skill | Purpose |
+|-------|---------|
+| react-testing | Testing patterns and setup |
+| clean-code | Code quality guidelines |
+| tailwind-css-patterns | Tailwind usage patterns |
+| tailwindcss-animations | Animations/transitions |
+| interface-design | UI/UX best practices |
+| vercel-react-best-practices | React performance |
+
+Load with: `/skill <name>` command
+
+## Performance Notes
+
+- Memoize expensive computations with useMemo
+- Use lazy loading for heavy components if needed
+- Keep bundle size small - no external UI libraries
+- CRT overlay uses CSS pointer-events: none for performance
