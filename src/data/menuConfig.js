@@ -11,6 +11,7 @@ const menu = [
     items: [
       { path: '/mecanica-de-campo/reparacion-y-piezas', label: 'Reparación y Piezas' },
       { path: '/mecanica-de-campo/fichas-tecnicas-vehiculo', label: 'Fichas tecnicas de vehiculo' },
+      { path: '/mecanica-de-campo/manual-componentes', label: 'Manual Componentes' },
     ],
   },
   {
@@ -24,13 +25,13 @@ const menu = [
     section: 'Robotica',
     items: [
       { path: '/robotica/unidades', label: 'Unidades' },
-      { path: '/robotica/protocolos', label: 'Protocolos' },
+      { path: '/robotica/gestion-tecnica-droide', label: 'Gestión Tecnica Droide' },
     ],
   },
   {
-    section: 'Ingenieria',
+    section: 'OOC',
     items: [
-      { path: '/ingenieria/rol-pasivo', label: 'Rol Pasivo' },
+      { path: '/ooc/rol-pasivo', label: 'Rol Pasivo' },
     ],
   },
 ]

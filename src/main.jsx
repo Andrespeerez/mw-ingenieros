@@ -12,8 +12,9 @@ import FichasTecnicasVehiculo from './pages/MecanicaDeCampo/FichasTecnicasVehicu
 import ComsYCifrado from './pages/Ciberseguridad/ComsYCifrado'
 import Hackeo from './pages/Ciberseguridad/Hackeo'
 import Unidades from './pages/Robotica/Unidades'
-import Protocolos from './pages/Robotica/Protocolos'
+import GestionTecnicaDroide from './pages/Robotica/GestionTecnicaDroide'
 import RolPasivo from './pages/Ingenieria/RolPasivo'
+import ManualComponentes from './pages/MecanicaDeCampo/ManualComponentes'
 
 const AppRouter = () => {
   return (
@@ -27,11 +28,12 @@ const AppRouter = () => {
               <Route path="reglamento-base" element={<ReglamentoBase />} />
               <Route path="mecanica-de-campo/reparacion-y-piezas" element={<ReparacionPiezas />} />
               <Route path="mecanica-de-campo/fichas-tecnicas-vehiculo" element={<FichasTecnicasVehiculo />} />
+              <Route path="mecanica-de-campo/manual-componentes" element={<ManualComponentes />} />
               <Route path="ciberseguridad/coms-y-cifrado" element={<ComsYCifrado />} />
               <Route path="ciberseguridad/hackeo" element={<Hackeo />} />
               <Route path="robotica/unidades" element={<Unidades />} />
-              <Route path="robotica/protocolos" element={<Protocolos />} />
-              <Route path="ingenieria/rol-pasivo" element={<RolPasivo />} />
+              <Route path="robotica/gestion-tecnica-droide" element={<GestionTecnicaDroide />} />
+              <Route path="ooc/rol-pasivo" element={<RolPasivo />} />
             </Route>
           </Route>
           <Route path="*" element={<Navigate to="/login" />} />
